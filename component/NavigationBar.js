@@ -1,25 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { DownOutlined } from '@ant-design/icons';
 import { TweenMax } from 'gsap'
+import Link from 'next/link'
 
 const navigationList = [
     {
         name: 'รายการส่งของ',
         children: [
             {
-                name: 'ดูรายการทั้งหมด'
+                name: 'ดูรายการทั้งหมด',
+                url: "/order/view"
             },
             {
-                name: 'พิมพ์ใบจัดส่ง/ปะหน้า'
+                name: 'พิมพ์ใบจัดส่ง/ปะหน้า',
+                url: "/order/purchase"
             },
             {
-                name: 'สร้างรายการ'
+                name: 'สร้างรายการ',
+                url: "/order/create"
             },
             {
-                name: 'สร้างรายการจากไฟล์'
+                name: 'สร้างรายการจากไฟล์',
+                url: "/order/upload"
             },
             {
-                name: 'รายการขนส่งที่เกิดปัญหา'
+                name: 'รายการขนส่งที่เกิดปัญหา',
+                url: "/report/order/problam"
             }
         ]
     },
@@ -27,13 +33,20 @@ const navigationList = [
         name: 'รายงานทางบัญชี',
         children: [
             {
-                name: 'รายการค้างชำระ'
+                name: 'รายงานทางบัญชี',
+                url: "/report"
             },
             {
-                name: 'รายงานใบเสร็จรับเงิน'
+                name: 'รายการค้างชำระ',
+                url: "/report/invoice"
             },
             {
-                name: 'รายงานความคุ้มครองพัสดุ'
+                name: 'รายงานใบเสร็จรับเงิน',
+                url: "/report/receipt"
+            },
+            {
+                name: 'รายงานความคุ้มครองพัสดุ',
+                url: "/report/order/insurance"
             }
         ]
     },
@@ -41,7 +54,8 @@ const navigationList = [
         name: 'ที่อยู่',
         children: [
             {
-                name: 'ต้นทาง/ผู้จัดส่ง'
+                name: 'ต้นทาง/ผู้จัดส่ง',
+                url: "/address"
             }
         ]
     },
@@ -49,16 +63,20 @@ const navigationList = [
         name: 'ตั้งค่า',
         children: [
             {
-                name: 'ข้อมูลส่วนตัว'
+                name: 'ข้อมูลส่วนตัว',
+                url: "/profile"
             },
             {
-                name: 'ข้อมูลราคาขนส่ง'
+                name: 'ข้อมูลราคาขนส่ง',
+                url: "/courier_rate"
             },
             {
-                name: 'แก้ไขรหัสผ่าน'
+                name: 'แก้ไขรหัสผ่าน',
+                url: "/reset_password"
             },
             {
-                name: 'ออกจากระบบ'
+                name: 'ออกจากระบบ',
+                url: "/logout"
             }
         ]
     }
@@ -103,8 +121,10 @@ const NavigationBar = () => {
                             >
                                 {
                                     children.map((child, indexChild) => {
-                                        const { name } = child
-                                        return <p ref={menuRef} className="text-nav" key={indexChild}>{name}</p>
+                                        const { name, url } = child
+                                        return <Link href={url}>
+                                            <a ref={menuRef} className="text-nav" key={indexChild}>{name}</a>
+                                        </Link>
                                     })
                                 }
                             </div>

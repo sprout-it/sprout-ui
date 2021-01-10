@@ -1,7 +1,9 @@
 import React from 'react';
 import NavigationBar from '../component/NavigationBar'
 import '../styles/navgiationBar.css'
+import '../styles/create.css'
 import '../styles/address.css'
+import '../styles/reset-password.css'
 import '../styles/globals.css'
 import 'antd/dist/antd.css';
 
