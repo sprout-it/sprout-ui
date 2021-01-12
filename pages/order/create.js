@@ -12,7 +12,7 @@ const Create = () => {
             <div className="create-box">
                 <h2>ต้นทาง / ผู้จัดส่ง</h2>
                 <label>ชื่อผู้ส่ง</label>
-                <Input.Search className="create-input" enterButton="สวัสดี" onSearch={handleSearch} />
+                <Input.Search className="create-input" required enterButton="สวัสดี" onSearch={handleSearch} />
                 <label>เบอร์โทร</label>
                 <Input type="text" />
                 <label>ที่อยู่</label>
