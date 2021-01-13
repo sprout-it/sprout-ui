@@ -12,30 +12,27 @@ const Chart = () => {
 
     useEffect(() => {
         let chart = am4core.create(chartRef.current, am4maps.MapChart);
-
-        // Set map definition
         chart.geodata = am4geodata_thailand.default;
-
-        // Set projection
         chart.projection = new am4maps.projections.Miller();
 
-        // Create map polygon series
-        let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-
-        // Make map load polygon (like country names) data from GeoJSON
-        polygonSeries.useGeodata = true;
-        // polygonSeries.exclude = "TH-10"
-
-        // Configure series
-        let polygonTemplate = polygonSeries.mapPolygons.template;
+        let defaultPolygon = chart.series.push(new am4maps.MapPolygonSeries());
+        defaultPolygon.useGeodata = true;
+        let polygonTemplate = defaultPolygon.mapPolygons.template;
         polygonTemplate.tooltipText = "{name}";
-        polygonTemplate.fill = am4core.color("#74B266");
-
-        // Create hover state and set alternative fill color
         let hs = polygonTemplate.states.create("hover");
         hs.properties.fill = am4core.color("#367B25");
+
+        let havePackage = chart.series.push(new am4maps.MapPolygonSeries());
+        havePackage.useGeodata = true;
+        havePackage.include = ['TH-10']
+        polygonTemplate = havePackage.mapPolygons.template;
+        polygonTemplate.fill = am4core.color("#96BDC6");
+        polygonTemplate.tooltipText = "{name}";
+        hs = polygonTemplate.states.create("hover");
+        hs.properties.fill = am4core.color("#367B25");
+
         polygonTemplate.events.on('down', e => {
-            console.log(polygonSeries.data)
+            console.log(defaultPolygon.data)
         })
 
         return () => {
