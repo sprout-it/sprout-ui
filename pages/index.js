@@ -33,20 +33,24 @@ const Index = () => {
         <div className="index-package-list">
           <div className="index-table-wraper">
             <table>
-              <tr>
-                <th>รหัส Tracking Code</th>
-                <th>รหัสติดตามพัสดุจากขนส่ง</th>
-                <th>ที่อยู่ปลายทาง</th>
-                <th>วันที่จัดส่ง</th>
-                <th>สถานะ</th>
-              </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th>รหัส Tracking Code</th>
+                  <th>รหัสติดตามพัสดุจากขนส่ง</th>
+                  <th>ที่อยู่ปลายทาง</th>
+                  <th>วันที่จัดส่ง</th>
+                  <th>สถานะ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>Address</td>
+                  <td>Address</td>
+                  <td>Address</td>
+                  <td>Address</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

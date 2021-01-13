@@ -122,8 +122,8 @@ const NavigationBar = () => {
                                 {
                                     children.map((child, indexChild) => {
                                         const { name, url } = child
-                                        return <Link href={url}>
-                                            <a ref={menuRef} className="text-nav" key={indexChild}>{name}</a>
+                                        return <Link key={indexChild} href={url}>
+                                            <a ref={menuRef} className="text-nav" >{name}</a>
                                         </Link>
                                     })
                                 }

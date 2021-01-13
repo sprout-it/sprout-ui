@@ -1,7 +1,6 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
-import * as am4geodata_thailand from "@amcharts/amcharts4-geodata/json/thailandHigh.json";
-// import * as am4geodata_thailand from "@amcharts/amcharts4-geodata/thailandHigh";
+import * as am4geodata_thailand from "../utils/thailandHigh.json";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { useRef, useEffect, useLayoutEffect } from 'react'
 
@@ -25,6 +24,7 @@ const Chart = () => {
         let havePackage = chart.series.push(new am4maps.MapPolygonSeries());
         havePackage.useGeodata = true;
         havePackage.include = ['TH-10']
+        console.log(havePackage.data)
         polygonTemplate = havePackage.mapPolygons.template;
         polygonTemplate.fill = am4core.color("#96BDC6");
         polygonTemplate.tooltipText = "{name}";
