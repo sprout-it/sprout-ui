@@ -1,0 +1,10 @@
+.view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.view-head {
+    display: flex;
+    flex-direction: row;
+}

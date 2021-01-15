@@ -1,6 +1,9 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import express from 'express';
 
-export default (req, res) => {
-  res.statusCode = 200
-  res.json({ name: 'John Doe' })
-}
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Test Success')
+})
+
+export default test(app)
