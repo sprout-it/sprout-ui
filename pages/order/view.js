@@ -3,6 +3,7 @@ import moment from 'moment';
 import { DatePicker, Select, Button } from 'antd';
 import useFetch from 'use-http'
 import { useCookies } from 'react-cookie';
+import { firestore } from '../../utils/firebase'
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { RangePicker } = DatePicker;
 
@@ -10,9 +11,23 @@ const View = () => {
     const options = ["ทั้งหมด", "ยืนยันแล้ว", "ระหว่างจัดส่ง", "สำเร็จ", "เกิดข้อผิดพลาด"]
     const [cookies, setCookie, removeCookie] = useCookies(['users']);
     const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/tracking`)
+    const orderRef = firestore.collection('order')
+    const date = new Date()
+    
     const disabledDate = (current) => {
         return current && current < moment().endOf('day');
     }
+
+    const getOrderValue = async (limit) => {
+        const value = await orderRef.orderBy('purchase_id', 'desc').limit(2).get()
+        value.forEach(res => {
+            console.log(res.data())
+        })
+    }
+
+    useEffect(() => {
+        getOrderValue()
+    }, [])
 
     return (
         <div className="view-container">
