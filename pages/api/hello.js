@@ -1,8 +1,3 @@
-import express from 'express';
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Test Success')
-})
-
-export default test(app)
+export default function handler(req, res) {
+  res.send('Test')
+}

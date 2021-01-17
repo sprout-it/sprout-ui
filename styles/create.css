@@ -27,4 +27,6 @@
 
 .create-box>h2 {
     align-self: start;
+    width: 100vw;
+    background: greenyellow;
 }

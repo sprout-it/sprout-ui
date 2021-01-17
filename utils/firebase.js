@@ -35,6 +35,7 @@ let functions = firebase.functions()
 // }
 
 export {
+    firebase,
     firestore,
     database,
     // storage,

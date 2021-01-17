@@ -18,7 +18,7 @@
         cursor: pointer;
         justify-items: center;
         padding: 20px;
-        background: rgb(31, 255, 132);
+        background: #D0E6A5;
     }
     .text-nav {
         padding: 5px;
@@ -26,7 +26,7 @@
     }
     .text-nav:hover {
         padding: 5px;
-        background: rgb(255, 255, 255);
+        background: #D0E6A5;
         margin: 0;
     }
     .nav-select {
@@ -35,13 +35,24 @@
         border-radius: 3px;
         padding: 2px;
         overflow: hidden;
-        background: rgb(78, 248, 78);
+        background: #D0E6A5;
         transform: translateX(-60px);
         min-width: 120px;
         display: flex;
         /* justify-content: flex-start; */
         flex-direction: column;
         z-index: 1;
+    }
+    .main {
+        position: absolute;
+        padding: 20px;
+        left: 0;
+    }
+    .main:hover {
+        cursor: pointer;
+        justify-items: center;
+        padding: 20px;
+        background: #D0E6A5;
     }
 }
 
@@ -66,11 +77,11 @@
         margin: 0;
     }
     .text-nav:hover {
-        background: rgb(255, 255, 255);
+        background: #D0E6A5;
         margin: 0;
     }
     .nav-select {
-        background: rgb(255, 255, 255);
+        background: #D0E6A5;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;

@@ -103,6 +103,11 @@ const NavigationBar = () => {
 
     return (
         <div className="navigationBar">
+            <Link href='/'>
+                <a className="main">
+                    หน้าแรก
+                </a>
+            </Link>
             {
                 navigationList.map((navigation, index) => {
                     const { name, children } = navigation
