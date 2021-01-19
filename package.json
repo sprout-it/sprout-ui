@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "start": "next start",
     "export": "next build && next export",
-    "start": "next start"
+    "deploy": "next build && next export && firebase deploy --only hosting"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.13",
     "@amcharts/amcharts4-geodata": "^4.1.19",
     "@ant-design/icons": "^4.3.0",
     "antd": "^4.10.0",
+    "axios": "^0.21.1",
     "chart.js": "^2.9.4",
     "express": "^4.17.1",
     "firebase": "^8.2.3",

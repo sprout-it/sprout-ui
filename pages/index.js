@@ -1,36 +1,45 @@
 import React, { useEffect } from 'react'
-import moment from 'moment';
-import { DatePicker } from 'antd';
 import dynamic from "next/dynamic";
+import Container from '../component/Container'
 
 const Chart = dynamic(
   () => import("../component/Chart"),
   { ssr: false }
 );
-const { RangePicker } = DatePicker;
-
-const disabledDate = (current) => {
-  return current && current < moment().endOf('day');
-}
 
 const Index = () => {
-
   return (
     <div>
       <div className="App">
-        <div className="index-name">
-          hello my mame
+        <Container>
+          <div className="index-name">
+            hello my mame
         </div>
-        <div className="index-chart">
-          <RangePicker disabledDate={disabledDate} />
-        </div>
+        </Container>
+        <Container>
+          <div className="index-chart">
+            <form method="post" action="">
+              <div className="col-md-2">เลือกช่วงวันที่ต้องการ</div>
+              <div className="col-md-4 picker-container">
+                <div className="index-input-datarange">
+                  <input type="text" className="input-sm form-control" name="datetime-start" placeholder="yyyy-mm-dd" value="01/01/2021" />
+                  <span className="input-group-addon">ถึง</span>
+                  <input type="text" className="input-sm form-control" name="datetime-end" placeholder="yyyy-mm-dd" value="31/01/2021" />
+                </div>
+              </div>
+              <div className="col-md-2">
+                <button className="btn btn-info btn-search-summary btn-search" data-search="summary" data-mode="get">แสดงข้อมูล</button>
+              </div>
+            </form>
+          </div>
+        </Container>
         <div className="index-map">
           <Chart />
         </div>
         <div className="index-top-ten">
 
         </div>
-        <div className="index-package-list">
+        <Container>
           <div className="index-table-wraper">
             <table>
               <thead>
@@ -53,7 +62,7 @@ const Index = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </Container>
       </div>
     </div>
   )

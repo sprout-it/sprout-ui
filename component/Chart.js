@@ -3,6 +3,7 @@ import * as am4maps from "@amcharts/amcharts4/maps";
 import * as am4geodata_thailand from "../utils/thailandHigh.json";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { useRef, useEffect, useLayoutEffect } from 'react'
+import Container from './Container'
 
 am4core.useTheme(am4themes_animated);
 
@@ -41,7 +42,9 @@ const Chart = () => {
     }, []);
 
     return (
-        <div ref={chartRef} style={{ width: "827px", height: "500px" }}></div>
+        <Container>
+            <div className="chart" ref={chartRef}></div>
+        </Container>
     );
 }
 
