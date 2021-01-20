@@ -3,7 +3,6 @@ import { DatePicker, Select, Button } from 'antd';
 import useFetch from 'use-http'
 import { useCookies } from 'react-cookie';
 import { firestore } from '../../utils/firebase'
-import axios from 'axios'
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 
 const View = ({ orderData }) => {
@@ -12,7 +11,21 @@ const View = ({ orderData }) => {
     const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/tracking_purchase/`, { cachePolicy: "no-cache" })
     const orderRef = firestore.collection('order')
     const date = new Date()
-    const [data, setData] = useState(orderData)
+    const [data, setData] = useState([])
+
+    const getOrderValue = async (limit) => {
+        const value = await orderRef.orderBy('created', 'desc').limit(2).get()
+        const orderData = Promise.all(value.docs.map(async res => {
+            const getStatus = await post('/', {
+                api_key: "dv12294a1b9aec5fed19559e50eaebd7337db35333ab6efcb3d34fd5c6f9efefbbec81479eefa687801607938910",
+                purchase_id: res.data().purchase_id,
+                email: res.data().from.email
+            })
+            console.log(getStatus.purchase_status)
+            return { ...res.data(), purchase_status: getStatus.purchase_status }
+        }))
+        setData(await orderData)
+    }
 
     const nextPage = async (fieldValue) => {
         let nextPageData = []
@@ -33,7 +46,7 @@ const View = ({ orderData }) => {
     }
 
     useEffect(() => {
-        // getOrderValue()
+        getOrderValue()
     }, [])
 
     return (
@@ -106,25 +119,27 @@ const View = ({ orderData }) => {
     )
 }
 
-View.getInitialProps = async () => {
-    const orderRef = firestore.collection('order')
-    const value = await orderRef.orderBy('created', 'desc').limit(2).get()
-    const orderData = Promise.all(value.docs.map(async res => {
-        const getStatus = await axios.post(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/tracking_purchase`, {
-            api_key: "dv12294a1b9aec5fed19559e50eaebd7337db35333ab6efcb3d34fd5c6f9efefbbec81479eefa687801607938910",
-            purchase_id: res.data().purchase_id,
-            email: res.data().from.email
-        }, {
-            headers: {
-                // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                "X-Requested-With": "XMLHttpRequest"
-            }
-        })
-        console.log(getStatus.data)
-        return { ...res.data(), purchase_status: getStatus.data.purchase_status }
-    }))
-    // console.log(await orderData)
-    return { orderData: await orderData }
-}
+// View.getInitialProps = async () => {
+//     const orderRef = firestore.collection('order')
+//     const value = await orderRef.orderBy('created', 'desc').limit(2).get()
+//     const orderData = Promise.all(value.docs.map(async res => {
+//         const getStatus = await axios.post(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/tracking_purchase`, {
+//             api_key: "dv12294a1b9aec5fed19559e50eaebd7337db35333ab6efcb3d34fd5c6f9efefbbec81479eefa687801607938910",
+//             purchase_id: res.data().purchase_id,
+//             email: res.data().from.email
+//         }, {
+//             headers: {
+//                 // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//                 // Origin: "http://localhost:3000",
+//                 // "X-Requested-With": "XMLHttpRequest"
+//             }
+//         })
+//         console.log(getStatus.data)
+//         return { ...res.data(), purchase_status: getStatus.data.purchase_status }
+//     }))
+
+//     // console.log(await orderData)
+//     return { orderData: await orderData }
+// }
 
 export default View

@@ -1,9 +1,5 @@
 module.exports = {
-    i18n: {
-        locales: ['en-US', 'fr', 'nl-NL'],
-        defaultLocale: 'en-US',
-    },
-    exportPathMap: function () {
+    exportPathMap: () => {
         return {
             '/': { page: '/' },
             '/address': { page: '/address' },

@@ -28,7 +28,6 @@ const Create = () => {
         })
         delete convertForm.from
         const myPost = await post(convertForm)
-        console.log(myPost.data)
         Object.values(myPost.data).map(async item => {
             await dataRef.add({
                 ...item,
