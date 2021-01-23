@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import useFetch from 'use-http'
 import { useForm } from 'react-hook-form'
-import { firestore, firebase } from '../../utils/firebase'
-import { TweenMax } from 'gsap'
+import { firestore } from '../../utils/firebase'
+import { Button } from 'antd'
 import Container from '../../component/Container'
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
+const { NEXT_PUBLIC_API_KEY } = process.env
 
 const Create = () => {
     const dataRef = firestore.collection('order')
@@ -14,7 +15,6 @@ const Create = () => {
     const [update, setUpdate] = useState(0)
     const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/booking/`, { cachePolicy: 'no-cache', })
     const date = new Date()
-    const destinationRef = useRef()
 
     const onSubmit = async data => {
         let convertForm = data
@@ -27,7 +27,10 @@ const Create = () => {
             }
         })
         delete convertForm.from
-        const myPost = await post(convertForm)
+        const myPost = await post({
+            ...convertForm,
+            api_key: NEXT_PUBLIC_API_KEY,
+        })
         Object.values(myPost.data).map(async item => {
             await dataRef.add({
                 ...item,
@@ -41,7 +44,7 @@ const Create = () => {
     const addMore = (key) => {
         let add = dynamicTo
         if (add.length - 1 == key) {
-            add.push({ ...dynamicTo, showMore: false })
+            add.push({ showMore: false })
             setDynamicTo(add)
             setUpdate(Math.random())
         }
@@ -52,6 +55,16 @@ const Create = () => {
         tempDyn[key].showMore = !tempDyn[key].showMore
         setDynamicTo(tempDyn)
         setUpdate(Math.random())
+    }
+
+    const removeLastDest = () => {
+        let pop = dynamicTo
+        if (dynamicTo.length >= 1) {
+            pop.pop()
+            console.log(pop)
+            setDynamicTo(pop)
+            setUpdate(Math.random())
+        }
     }
 
     return (
@@ -70,10 +83,10 @@ const Create = () => {
                         <tbody>
                             <tr>
                                 <td className="create-header-content">
-                                    <div>
+                                    {/* <div>
                                         <label>API KEY!</label>
                                         <input name="api_key" ref={register} type="text" />
-                                    </div>
+                                    </div> */}
                                     <div>
                                         <label>email</label>
                                         <input name="email" ref={register} type="text" />
@@ -84,7 +97,7 @@ const Create = () => {
                                     </div>
                                     <div>
                                         <label>ที่อยู่</label>
-                                        <textarea name={`from.address`} ref={register} type="textArea" />
+                                        <input name={`from.address`} ref={register} type="text" />
                                     </div>
                                     <div>
                                         <label>รหัสไปรษณีย์</label>
@@ -113,6 +126,7 @@ const Create = () => {
                                 <td className="create-body-content">
                                     {dynamicTo.map((item, key) =>
                                         <div className="create-border-destination" key={key}>
+                                            {dynamicTo.length - 1 == key && key != 0 && <div className="remove" onClick={removeLastDest}>-</div>}
                                             <div>
                                                 <div>
                                                     <label>ชื่อ - นามสกุล</label>
@@ -120,7 +134,7 @@ const Create = () => {
                                                 </div>
                                                 <div>
                                                     <label>ที่อยู่</label>
-                                                    <textarea onInput={() => addMore(key)} name={`data[${key}].to.address`} ref={register} type="textArea" />
+                                                    <input onInput={() => addMore(key)} name={`data[${key}].to.address`} ref={register} type="textArea" />
                                                 </div>
                                                 <div>
                                                     <label>รหัสไปรษณีย์</label>
@@ -179,15 +193,18 @@ const Create = () => {
                                                     </div>
                                                 </div>
                                             }
-                                            <button type="button" onClick={() => showMore(key)}>{item.showMore ? "-" : "+"}</button>
+                                            <div>
+                                                <div type="button" className="showMore" onClick={() => showMore(key)}>{item.showMore ? "-" : "+"}</div>
+                                                <label>{item.showMore ? "แสดงน้อยลง" : "แสดงเพิ่มเติม"}</label>
+                                            </div>
                                         </div>
                                     )}
+                                    <button type="submit">สร้างรายการส่งของ</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </Container>
-                <button type="submit" >Submit</button>
             </form>
         </div >
     )

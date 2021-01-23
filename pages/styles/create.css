@@ -14,12 +14,12 @@
     flex-direction: column;
 }
 
-.create-box>table {
-    width: 500px;
+.create-header-content>div {
+    display: flex;
 }
 
-.create-header-content, .create-body-content {
-    padding: 38px 100px 38px 100px;
+.create-box>table {
+    min-width: 500px;
 }
 
 .create-box>h2 {
@@ -27,7 +27,25 @@
     background: greenyellow;
 }
 
+.create-border-destination>div>div {
+    display: flex;
+    flex-direction: column;
+    margin: 3px;
+    padding: 0px;
+}
+
+.create-border-destination>div>div:nth-child(2) {
+    width: 300px;
+}
+
+.create-border-destination>div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .create-border-destination {
+    position: relative;
     border: 1px dotted black;
     /* padding: 20px 50px 20px 50px; */
     display: flex;
@@ -35,18 +53,30 @@
     padding: 5px;
 }
 
-.create-border-destination>div:nth-child(1) {
-    display: flex;
-    flex-direction: row;
+.create-border-destination>.remove {
+    position: absolute;
+    padding: 5px;
+    background: green;
+    cursor: pointer;
+    right: 0;
 }
 
-.create-border-destination>div:nth-child(2) {
+.create-border-destination>div>.showMore {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background: greenyellow;
+    padding: 0;
+    margin: 0;
+    border: 3px solid green;
+    cursor: pointer;
 }
 
-.create-border-destination>div:nth-child(2)>div {
-    display: flex;
-    flex-direction: column;
+.create-body-content>button {
+    background: rgb(193, 238, 127);
+    border: 2px solid rgb(204, 165, 165);
+    border-radius: 5px;
 }

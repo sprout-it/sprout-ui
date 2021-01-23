@@ -76,7 +76,6 @@ const View = () => {
                         <span>ถึง</span>
                         <input type="date" />
                     </span>
-                    {/* <RangePicker disabledDate={disabledDate} /> */}
                     <div>
                         <label>
                             ค้นหาข้อความ
