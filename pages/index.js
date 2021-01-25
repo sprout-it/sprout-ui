@@ -21,7 +21,7 @@ const Index = () => {
           <Container>
             <div className="index-name">
               hello my mame
-        </div>
+            </div>
           </Container>
           <Container>
             <div className="index-chart">

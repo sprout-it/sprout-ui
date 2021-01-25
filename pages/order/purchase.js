@@ -4,8 +4,6 @@ import { firestore } from '../../utils/firebase'
 import { Button } from 'antd'
 import useFetch from 'use-http'
 import { useReactToPrint } from 'react-to-print';
-import Router from 'next/router'
-import Link from 'next/link'
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 
