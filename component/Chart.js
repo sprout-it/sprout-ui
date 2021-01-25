@@ -42,9 +42,7 @@ const Chart = () => {
     }, []);
 
     return (
-        <Container>
-            <div className="chart" ref={chartRef}></div>
-        </Container>
+        <div className="chart" ref={chartRef}></div>
     );
 }
 
