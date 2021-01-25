@@ -193,8 +193,8 @@ const Create = () => {
                                                     </div>
                                                 </div>
                                             }
-                                            <div>
-                                                <div type="button" className="showMore" onClick={() => showMore(key)}>{item.showMore ? "-" : "+"}</div>
+                                            <div onClick={() => showMore(key)}>
+                                                <div type="button" className="showMore">{item.showMore ? "-" : "+"}</div>
                                                 <label>{item.showMore ? "แสดงน้อยลง" : "แสดงเพิ่มเติม"}</label>
                                             </div>
                                         </div>

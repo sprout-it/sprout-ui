@@ -1,7 +1,11 @@
+:root {
+  font-family: 'Mali', cursive;
+}
+
 html, body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Mali', cursive;
 }
 
 body {
@@ -29,23 +33,35 @@ th:nth-child(1) {
 }
 
 .table-wraper {
-  width: 980px;
+  min-width: 700px;
 }
 
-table {
+/* table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
-}
+} */
 
 th {
   border: 1px solid #dddddd;
   background: #D0E6A5;
   padding: 8px;
+  white-space: nowrap;
+}
+
+table {
+  position: relative;
 }
 
 td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  white-space: nowrap;
+}
+
+@media only screen and (max-width:320px) {
+  .table-wraper {
+    min-width: 300px;
+    overflow: hidden;
+  }
 }
