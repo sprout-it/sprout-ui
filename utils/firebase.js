@@ -28,10 +28,10 @@ let auth = firebase.auth()
 let functions = firebase.functions()
 
 // if (isDevevelopment) {
-//     firestore.useEmulator('localhost', 8080)
-//     database.useEmulator('localhost', 9000)
-//     functions.useEmulator('localhost', 5001)
-//     auth.useEmulator('http://localhost:9099')
+// firestore.useEmulator('localhost', 8080)
+// database.useEmulator('localhost', 9000)
+// functions.useEmulator('localhost', 5001)
+// auth.useEmulator('http://localhost:9099')
 // }
 
 export {

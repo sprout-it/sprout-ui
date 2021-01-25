@@ -1,0 +1,29 @@
+.login-container {
+    margin: 0 auto 0 auto;
+    width: 700px;
+    min-height: 100vh;
+}
+
+.get-code {
+    display: flex;
+    flex-direction: column;
+    padding: 150px;
+}
+
+/* .get-phone {
+    display: flex;
+    flex-direction: row;
+} */
+
+.login-button-login>div>input {
+    width: 300px;
+}
+
+.login-button-login {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .Otp-input>input {
+    width: 100px;
+} */

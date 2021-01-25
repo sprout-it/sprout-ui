@@ -2,8 +2,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import * as am4geodata_thailand from "../utils/thailandHigh.json";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { useRef, useEffect, useLayoutEffect } from 'react'
-import Container from './Container'
+import { useRef, useEffect } from 'react'
 
 am4core.useTheme(am4themes_animated);
 
