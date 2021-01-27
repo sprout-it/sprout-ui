@@ -3,10 +3,12 @@ import { DownOutlined } from '@ant-design/icons';
 import { TweenMax } from 'gsap'
 import Link from 'next/link'
 import GlobalState from '../utils/context'
+import Image from 'next/image'
 
 const navigationListAuthenticated = [
     {
         name: 'รายการส่งของ',
+        icon: "supplies.svg",
         children: [
             {
                 name: 'ดูรายการทั้งหมด',
@@ -28,10 +30,11 @@ const navigationListAuthenticated = [
                 name: 'รายการขนส่งที่เกิดปัญหา',
                 url: "/report/order/problam"
             }
-        ]
+        ],
     },
     {
         name: 'รายงานทางบัญชี',
+        icon: "bill.svg",
         children: [
             {
                 name: 'รายงานทางบัญชี',
@@ -53,15 +56,17 @@ const navigationListAuthenticated = [
     },
     {
         name: 'ที่อยู่',
+        icon: "address.svg",
         children: [
             {
                 name: 'ต้นทาง/ผู้จัดส่ง',
-                url: "/address"
+                url: "/address/origin"
             }
         ]
     },
     {
         name: 'ตั้งค่า',
+        icon: "settings.svg",
         children: [
             {
                 name: 'ข้อมูลส่วนตัว',
@@ -85,67 +90,9 @@ const navigationListAuthenticated = [
 
 const navigationListNotAuthenticated = [
     {
-        name: 'รายการส่งของ',
+        name: 'ลงชื่อเข้าใช้',
+        icon: "user.svg",
         children: [
-            {
-                name: 'ดูรายการทั้งหมด',
-                url: "/order/view"
-            },
-            {
-                name: 'พิมพ์ใบจัดส่ง/ปะหน้า',
-                url: "/order/purchase"
-            },
-            {
-                name: 'สร้างรายการ',
-                url: "/order/create"
-            },
-            // {
-            //     name: 'สร้างรายการจากไฟล์',
-            //     url: "/order/upload"
-            // },
-            {
-                name: 'รายการขนส่งที่เกิดปัญหา',
-                url: "/report/order/problam"
-            }
-        ]
-    },
-    {
-        name: 'รายงานทางบัญชี',
-        children: [
-            {
-                name: 'รายงานทางบัญชี',
-                url: "/report"
-            },
-            {
-                name: 'รายการค้างชำระ',
-                url: "/report/invoice"
-            },
-            {
-                name: 'รายงานใบเสร็จรับเงิน',
-                url: "/report/receipt"
-            },
-            {
-                name: 'รายงานความคุ้มครองพัสดุ',
-                url: "/report/order/insurance"
-            }
-        ]
-    },
-    {
-        name: 'ที่อยู่',
-        children: [
-            {
-                name: 'ต้นทาง/ผู้จัดส่ง',
-                url: "/address"
-            }
-        ]
-    },
-    {
-        name: 'ตั้งค่า',
-        children: [
-            {
-                name: 'ข้อมูลส่วนตัว',
-                url: "/profile"
-            },
             {
                 name: 'ข้อมูลราคาขนส่ง',
                 url: "/courier_rate"
@@ -195,6 +142,7 @@ const NavigationBar = () => {
                             handleNavSelect(index)
                         }}
                     >
+                        <Image className="img" src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
                         <div>{name}<DownOutlined /></div>
                         {
                             navSelect === index && <div
@@ -224,6 +172,7 @@ const NavigationBar = () => {
                             handleNavSelect(index)
                         }}
                     >
+                        <Image className="img" src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
                         <div>{name}<DownOutlined /></div>
                         {
                             navSelect === index && <div

@@ -1,13 +1,30 @@
 .login-container {
     margin: 0 auto 0 auto;
-    width: 700px;
+    width: 500px;
     min-height: 100vh;
+    padding: 70px 0 0 0;
+}
+
+.wrap-login {
+    width: 100vw;
+    background: #f2f2f2;
+}
+
+.wrap-login-container {
+    border-radius: 10px;
+    border: 3px solid #dddddd;
+    padding: 10px;
+}
+
+#get-code-button {
+    margin: 0 auto 0 auto;
 }
 
 .get-code {
     display: flex;
     flex-direction: column;
-    padding: 150px;
+    align-items: center;
+    padding: 50px 50px 50px 50px;
 }
 
 /* .get-phone {
@@ -15,13 +32,14 @@
     flex-direction: row;
 } */
 
-.login-button-login>div>input {
+/* .login-button-login>div>input {
     width: 300px;
-}
+} */
 
 .login-button-login {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 /* .Otp-input>input {

@@ -7,6 +7,7 @@ import GlobalState from '../utils/context'
 import { message } from 'antd'
 import './styles/navgiationBar.css'
 import './styles/create.css'
+import './styles/report.css'
 import './styles/view.css'
 import './styles/chart.css'
 import './styles/address.css'
@@ -37,8 +38,6 @@ const App = ({ Component, pageProps }) => {
     auth.onAuthStateChanged(state => {
       if (state) {
         setUser(state)
-        message.success('Login success')
-        Router.push('/')
       } else {
         setUser(null)
         Router.push('login')

@@ -11,10 +11,11 @@ const Report = () => {
                 <span>
                     <label>เลือกวันที่</label>
                     <input type="date" />
+                    <span style={{ background: "#0f0f0f0f" }}>ถึง</span>
                     <input type="date" />
                 </span>
                 <span>
-                    <label>
+                <label>
                         ค้นหาข้อความ
                 </label>
                     <input type="text" />

@@ -1,0 +1,14 @@
+.profile-header {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.address-table-wraper>table {
+    width: 100%;
+}
+
+.address-table-wraper {
+    width: 700px;
+}

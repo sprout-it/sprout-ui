@@ -3,7 +3,11 @@ import React from 'react'
 const Address = () => {
     return (
         <div className="address-container">
-            <div className="table-wraper">
+            <div className="profile-header">
+                <h1>ต้นทาง/ผู้จัดส่ง</h1>
+                <button>สร้างที่อยู่ใหม่</button>
+            </div>
+            <div className="address-table-wraper">
                 <table>
                     <tr>
                         <th>#</th>

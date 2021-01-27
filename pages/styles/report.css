@@ -1,0 +1,16 @@
+.view-container>.container>span:nth-child(1) {
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.view-container>.container>span:nth-child(2) {
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.view-container>.container {
+    display: flex;
+    flex-direction: row;
+}
