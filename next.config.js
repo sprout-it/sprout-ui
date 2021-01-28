@@ -2,7 +2,8 @@ module.exports = {
     exportPathMap: () => {
         return {
             '/': { page: '/' },
-            '/address': { page: '/address' },
+            '/address/origin': { page: '/address/origin' },
+            '/address/origin/create': { page: '/address/origin/create' },
             '/courier_rate': { page: '/courier_rate' },
             '/login': { page: '/login' },
             '/profile': { page: '/profile' },

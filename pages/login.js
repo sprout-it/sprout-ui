@@ -5,6 +5,7 @@ import PhoneInput from 'react-phone-input-2'
 import Container from '../component/Container'
 import { useForm } from 'react-hook-form'
 import { message } from 'antd'
+import Router from 'next/router'
 
 const Login = () => {
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -35,6 +36,7 @@ const Login = () => {
             .then(() => {
                 console.log('success')
                 message.success('Login success')
+                Router.push('/')
             })
             .catch(error => {
                 console.error(error);
