@@ -1,0 +1,25 @@
+.address-create {
+    padding: 50px;
+    background: #f5f5f5;
+}
+
+.address-create>.container {
+    width: 700px;
+    padding: 20px 20px 20px 20px;
+    margin: 0 auto 20px auto;
+}
+
+.address-create-form {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.address-create>.container>table {
+    width: 100%;
+}
+
+.address-create-form>div {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 10px 30px 20px 10px;
+}

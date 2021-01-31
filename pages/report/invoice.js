@@ -3,7 +3,7 @@ import Container from '../../component/Container'
 
 const Invoice = () => {
     return (
-        <div>
+        <div className="invoice-container">
             <h1>รายการค้างชำระ</h1>
             <Container>
                 <div className="table-wraper">

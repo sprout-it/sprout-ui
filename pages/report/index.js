@@ -11,7 +11,7 @@ const Report = () => {
         setReport(report)
     }
     return (
-        <div className="view-container">
+        <div className="order-container">
             <h1>รายงานทางบัญชี</h1>
             <Container>
                 <span>
@@ -39,36 +39,35 @@ const Report = () => {
                     <Button type="primary">ค้นหา</Button>
                 </span>
             </Container>
-            <div className="table-wraper">
-                <Container>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>No.</th>
-                                <th>รหัส Tracking Code</th>
-                                <th>ชื่อลูกค้า</th>
-                                <th>วันที่สร้างรายการ</th>
-                                <th>สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                report && report.map((item, index) => {
-                                    return <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        <td>{item.trackingCode}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.created}</td>
-                                        <td>{item.status}</td>
-                                    </tr>
-                                })
-                            }
-                            <td><input type="checkbox" /></td>
-                        </tbody>
-                    </table>
-                </Container>
-            </div>
+
+            <Container>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>No.</th>
+                            <th>รหัส Tracking Code</th>
+                            <th>ชื่อลูกค้า</th>
+                            <th>วันที่สร้างรายการ</th>
+                            <th>สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            report && report.map((item, index) => {
+                                return <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{item.trackingCode}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.created}</td>
+                                    <td>{item.status}</td>
+                                </tr>
+                            })
+                        }
+                        <td><input type="checkbox" /></td>
+                    </tbody>
+                </table>
+            </Container>
         </div>
     )
 }

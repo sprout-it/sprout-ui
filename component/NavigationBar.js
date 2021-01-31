@@ -48,10 +48,10 @@ const navigationListAuthenticated = [
                 name: 'รายงานใบเสร็จรับเงิน',
                 url: "/report/receipt"
             },
-            {
-                name: 'รายงานความคุ้มครองพัสดุ',
-                url: "/report/order/insurance"
-            }
+            // {
+            //     name: 'รายงานความคุ้มครองพัสดุ',
+            //     url: "/report/order/insurance"
+            // }
         ]
     },
     {

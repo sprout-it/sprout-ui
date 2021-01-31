@@ -3,9 +3,9 @@ import Container from '../../component/Container'
 import { firestore } from '../../utils/firebase'
 import { Button } from 'antd'
 import useFetch from 'use-http'
-import { useReactToPrint } from 'react-to-print';
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
+const { NEXT_PUBLIC_API_KEY } = process.env
 
 const Purchase = () => {
     const [data, setData] = useState([])
@@ -13,7 +13,6 @@ const Purchase = () => {
     const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/label`, { cachePolicy: "no-cache" })
     const downloadRef = useRef();
     const [printData, setPrintData] = useState()
-    const print = useReactToPrint({ content: () => componentRef.current })
     const getOrderValue = async (limit) => {
         const value = await orderRef.orderBy('created', 'desc').limit(2).get()
         const orderData = value.docs.map(item => item.data())
@@ -21,7 +20,7 @@ const Purchase = () => {
     }
 
     const getPrint = async (e) => {
-        const api_key = "dv12294a1b9aec5fed19559e50eaebd7337db35333ab6efcb3d34fd5c6f9efefbbec81479eefa687801607938910"
+        const api_key = NEXT_PUBLIC_API_KEY
         const getDataPrint = await post('/', { api_key, purchase_id: 189791, type: "pdf" })
         // setPrintData(getDataPrint)
         console.log(getDataPrint)
@@ -40,7 +39,7 @@ const Purchase = () => {
     }, [])
 
     return (
-        <div>
+        <div className="purchase-container">
             <h1>รายการจากรหัสใบสั่งซื้อ</h1>
             <Container>
                 <table>

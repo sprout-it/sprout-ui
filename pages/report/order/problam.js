@@ -32,7 +32,7 @@ const Problam = () => {
     }, [])
 
     return (
-        <div>
+        <div className="problam-container">
             <h1>รายการจากรหัสใบสั่งซื้อ</h1>
             <Container>
                 <table>
@@ -49,9 +49,9 @@ const Problam = () => {
                             <th>feedback</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {data.length > 0 ? <tbody>
                         {
-                            data.length > 1 ? data.map((item, key) =>
+                            data && data.map((item, key) =>
                                 <tr>
                                     <td><input type="checkbox" /></td>
                                     <td>{key + 1}</td>
@@ -64,9 +64,11 @@ const Problam = () => {
                                         <button>ตรวจสอบใบสั่งซื้อ</button>
                                     </td>
                                 </tr>
-                            ) : <tr>ไม่พบข้อมูล</tr>
+                            )
                         }
-                    </tbody>
+                    </tbody> :
+                        <tbody><td>ไม่พบข้อมูล</td></tbody>
+                    }
                 </table>
             </Container>
         </div>

@@ -16,7 +16,7 @@ const Create = () => {
     }
 
     return (
-        <div>
+        <div className="address-create">
             <Container>
                 <table>
                     <thead>
@@ -29,15 +29,23 @@ const Create = () => {
                     <tbody>
                         <tr>
                             <td>
-                                <form>
-                                    <label>ชื่อผู้ส่ง</label>
-                                    <input ref={register} name="name" type="text" />
-                                    <label>เบอร์โทร</label>
-                                    <input ref={register} name="tel" type="text" />
-                                    <label>ที่อยู่</label>
-                                    <input ref={register} name="address" type="text" />
-                                    <label>รหัสไปรษณีย์</label>
-                                    <input ref={register} name="postCode" type="text" />
+                                <form className="address-create-form">
+                                    <div>
+                                        <label>ชื่อผู้ส่ง</label>
+                                        <input ref={register} name="name" type="text" />
+                                    </div>
+                                    <div>
+                                        <label>เบอร์โทร</label>
+                                        <input ref={register} name="tel" type="text" />
+                                    </div>
+                                    <div>
+                                        <label>ที่อยู่</label>
+                                        <input ref={register} name="address" type="text" />
+                                    </div>
+                                    <div>
+                                        <label>รหัสไปรษณีย์</label>
+                                        <input ref={register} name="postCode" type="text" />
+                                    </div>
                                 </form>
                             </td>
                         </tr>

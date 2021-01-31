@@ -5,7 +5,7 @@ import Container from '../../component/Container'
 
 const Receipt = () => {
     return (
-        <div>
+        <div className="receipt-container">
             <h1>รายงานใบเสร็จรับเงิน</h1>
             <Container>
                 <Tabs defaultActiveKey="1" type="card" size='large'>

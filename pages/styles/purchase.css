@@ -1,0 +1,15 @@
+.purchase-container {
+    width: 100vw;
+    min-height: calc(100vh - 100px - 62px);
+}
+
+.purchase-container>h1 {
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+
+.purchase-container>.container {
+    margin: 0 auto 0 auto;
+    width: fit-content;
+    min-width: 320px;
+}

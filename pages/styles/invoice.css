@@ -1,0 +1,9 @@
+.invoice-container {
+    width: 100vw;
+    min-height: calc(100vh - 62px - 100px);
+}
+
+.invoice-container>.container {
+    margin: 0 auto 0 auto;
+    width: fit-content;
+}
