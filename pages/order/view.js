@@ -4,7 +4,9 @@ import useFetch from 'use-http'
 import { useCookies } from 'react-cookie';
 import { firestore } from '../../utils/firebase'
 import Container from '../../component/Container'
+import { DateFromTo } from '../../component/MyComponent'
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
+const { NEXT_PUBLIC_API_KEY } = process.env
 
 const View = () => {
     const options = ["ทั้งหมด", "ยืนยันแล้ว", "ระหว่างจัดส่ง", "สำเร็จ", "เกิดข้อผิดพลาด"]
@@ -20,7 +22,7 @@ const View = () => {
         const value = await orderRef.orderBy('created', 'desc').limit(2).get()
         const orderData = Promise.all(value.docs.map(async res => {
             const getStatus = await post('/', {
-                api_key: "dv12294a1b9aec5fed19559e50eaebd7337db35333ab6efcb3d34fd5c6f9efefbbec81479eefa687801607938910",
+                api_key: NEXT_PUBLIC_API_KEY,
                 purchase_id: res.data().purchase_id,
                 email: res.data().from.email
             })
@@ -59,7 +61,7 @@ const View = () => {
 
     return (
         <div className="view-container">
-            <h1>ดูรายการทั้งหมด</h1>
+            <h1 style={{ textAlign: "center" }}>ดูรายการทั้งหมด</h1>
             <Container>
                 <div className="view-head">
                     {/* <button onClick={() => {
@@ -70,18 +72,14 @@ const View = () => {
                         if (data[1])
                             prevPage(data[1].created)
                     }}>Previous</button> */}
-                    <label>เลือกวันที่</label>
-                    <span>
-                        <input type="date" />
-                        <span>ถึง</span>
-                        <input type="date" />
-                    </span>
+                    {/* <DateFromTo /> */}
                     <div>
                         <label>
                             ค้นหาข้อความ
-                </label>
+                        </label>
                         <input type="text" />
                     </div>
+
                     <div>
                         <Select defaultValue={options[0]}>
                             {
@@ -93,37 +91,38 @@ const View = () => {
                     </div>
                     <Button type="primary">ค้นหา</Button>
                 </div>
-                <Spin spinning={isLoading} tip="Loading">
-                    <div className="table-wraper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>No.</th>
-                                    <th>รหัส Tracking Code</th>
-                                    <th>ชื่อลูกค้า</th>
-                                    <th>วันที่สร้างรายการ</th>
-                                    <th>สถานะ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    data ? data.map((item, key) =>
-                                        <tr key={key}>
-                                            {/* <td><input type="checkbox" /></td> */}
-                                            <td>{key + 1}</td>
-                                            <td>{item.tracking_code}</td>
-                                            <td>{item.courier_tracking_code}</td>
-                                            <td>{item.to.name}</td>
-                                            <td>{item.created}</td>
-                                            <td>{item.purchase_status}</td>
-                                        </tr>
-                                    ) : ""
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </Spin>
+
+                {/* <Spin spinning={isLoading} tip="Loading"> */}
+                <div className="view-table-wraper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>No.</th>
+                                <th>รหัส Tracking Code</th>
+                                <th>ชื่อลูกค้า</th>
+                                <th>วันที่สร้างรายการ</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                data ? data.map((item, key) =>
+                                    <tr key={key}>
+                                        {/* <td><input type="checkbox" /></td> */}
+                                        <td>{key + 1}</td>
+                                        <td>{item.tracking_code}</td>
+                                        <td>{item.courier_tracking_code}</td>
+                                        <td>{item.to.name}</td>
+                                        <td>{item.created}</td>
+                                        <td>{item.purchase_status}</td>
+                                    </tr>
+                                ) : ""
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                {/* </Spin> */}
             </Container>
         </div>
     )

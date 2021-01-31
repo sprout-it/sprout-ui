@@ -13,15 +13,7 @@ const Index = () => {
   const fixedRef = useRef()
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    setTimeout(() => setLoading(false), 5000)
-    gsap.to(fixedRef.current, {
-      scrollTrigger: {
-        trigger: fixedRef.current,
-      },
-      // position: 'fixed',
-      rotation: 360
-      // top: 0
-    })
+    // setTimeout(() => setLoading(false), 5000)
   }, [])
 
   return (

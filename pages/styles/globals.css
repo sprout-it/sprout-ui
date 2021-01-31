@@ -30,10 +30,12 @@ th:nth-child(1) {
 }
 
 .table-wraper {
+  margin: 0 auto 0 auto;
   min-width: 700px;
 }
 
 table {
+  margin: 0 auto 0 auto;
   font-family: arial, sans-serif;
   border-collapse: collapse;
 }

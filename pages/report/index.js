@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Select, Button } from 'antd';
 import Container from '../../component/Container'
+import { firestore } from '../../utils/firebase'
 
 const Report = () => {
     const options = ["ทั้งหมด", "ยืนยันแล้ว", "ระหว่างจัดส่ง", "สำเร็จ", "เกิดข้อผิดพลาด"]
+    const [report, setReport] = useState()
+    const getInitialReport = async () => {
+        const report = await firestore.collection(`report`).orderBy(`created`, 'desc').limit(2).get()
+        setReport(report)
+    }
     return (
         <div className="view-container">
             <h1>รายงานทางบัญชี</h1>
@@ -15,7 +21,7 @@ const Report = () => {
                     <input type="date" />
                 </span>
                 <span>
-                <label>
+                    <label>
                         ค้นหาข้อความ
                 </label>
                     <input type="text" />
@@ -36,22 +42,30 @@ const Report = () => {
             <div className="table-wraper">
                 <Container>
                     <table>
-                        <tr>
-                            <th>#</th>
-                            <th>No.</th>
-                            <th>รหัส Tracking Code</th>
-                            <th>ชื่อลูกค้า</th>
-                            <th>วันที่สร้างรายการ</th>
-                            <th>สถานะ</th>
-                        </tr>
-                        <tr>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>No.</th>
+                                <th>รหัส Tracking Code</th>
+                                <th>ชื่อลูกค้า</th>
+                                <th>วันที่สร้างรายการ</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                report && report.map((item, index) => {
+                                    return <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{item.trackingCode}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.created}</td>
+                                        <td>{item.status}</td>
+                                    </tr>
+                                })
+                            }
                             <td><input type="checkbox" /></td>
-                            <td>Address</td>
-                            <td>Address</td>
-                            <td>Address</td>
-                            <td>Address</td>
-                            <td>Address</td>
-                        </tr>
+                        </tbody>
                     </table>
                 </Container>
             </div>

@@ -35,12 +35,6 @@ const Address = () => {
                             <th>รหัสไปรษณีย์</th>
                         </tr>
                     </thead>
-                    {/* <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>Address</td>
-                        <td>Address</td>
-                        <td>Address</td>
-                    </tr> */}
                     <tbody>
                         {
                             originData && originData.map((item, key) =>
