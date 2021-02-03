@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { firestore } from '../../utils/firebase'
 import Container from '../../component/Container'
 import { DateFromTo } from '../../component/MyComponent'
+import { Table } from 'react-bootstrap'
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { NEXT_PUBLIC_API_KEY } = process.env
 
@@ -94,9 +95,9 @@ const View = () => {
 
                 {/* <Spin spinning={isLoading} tip="Loading"> */}
                 <div className="view-table-wraper">
-                    <table>
+                    <Table striped bordered hover>
                         <thead>
-                            <tr>
+                            <tr className="table-success">
                                 <th>#</th>
                                 <th>No.</th>
                                 <th>รหัส Tracking Code</th>
@@ -120,7 +121,7 @@ const View = () => {
                                 ) : ""
                             }
                         </tbody>
-                    </table>
+                    </Table>
                 </div>
                 {/* </Spin> */}
             </Container>

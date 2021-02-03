@@ -25,6 +25,7 @@ import './styles/receipt.css'
 import 'antd/dist/antd.css';
 import 'react-phone-input-2/lib/high-res.css'
 import 'chart.js/dist/Chart.bundle.min.js'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const App = ({ Component, pageProps }) => {
   const [user, setUser] = useState()
