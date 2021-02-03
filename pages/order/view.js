@@ -108,9 +108,9 @@ const View = () => {
                         <tbody>
                             {
                                 data ? data.map((item, key) =>
-                                    <tr key={key}>
+                                    <tr className="table-success" key={key}>
                                         {/* <td><input type="checkbox" /></td> */}
-                                        <td>{key + 1}</td>
+                                        <td className="table-success">{key + 1}</td>
                                         <td>{item.tracking_code}</td>
                                         <td>{item.courier_tracking_code}</td>
                                         <td>{item.to.name}</td>

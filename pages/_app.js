@@ -40,15 +40,14 @@ const App = ({ Component, pageProps }) => {
   }
 
   useEffect(() => {
-    auth.onAuthStateChanged(state => {
-      if (state) {
-        setUser(state)
-      } else {
-        setUser(null)
-        Router.push('login')
-      }
-    })
-
+    // auth.onAuthStateChanged(state => {
+    //   if (state) {
+    //     setUser(state)
+    //   } else {
+    //     setUser(null)
+    //     Router.push('login')
+    //   }
+    // })
   }, [])
 
   return <GlobalState.Provider value={{

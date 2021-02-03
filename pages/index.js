@@ -21,6 +21,7 @@ const Index = () => {
       {/* <Spin spinning={loading}> */}
       <Container>
         <div className="index-name">
+          <button type="button" className="btn btn-primary">Primary</button>
           ทดสอบ
             </div>
       </Container>

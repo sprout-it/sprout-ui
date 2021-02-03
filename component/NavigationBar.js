@@ -133,7 +133,7 @@ const NavigationBar = () => {
                 </a>
             </Link>
             {
-                user && navigationListAuthenticated.map((navigation, index) => {
+                !user && navigationListAuthenticated.map((navigation, index) => {
                     const { name, children } = navigation
                     return <div
                         className="navbar-menu"
@@ -162,7 +162,7 @@ const NavigationBar = () => {
                     </div>
                 })
             }
-            {
+            {/* {
                 !user && navigationListNotAuthenticated.map((navigation, index) => {
                     const { name, children } = navigation
                     return <div
@@ -191,7 +191,7 @@ const NavigationBar = () => {
                         }
                     </div>
                 })
-            }
+            } */}
 
         </div>
     )
