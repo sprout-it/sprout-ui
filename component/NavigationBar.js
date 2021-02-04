@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { DownOutlined } from '@ant-design/icons';
+import React, { useState, useEffect, useRef, useContext, createRef } from 'react'
 import { TweenMax } from 'gsap'
 import Link from 'next/link'
 import GlobalState from '../utils/context'
 import Image from 'next/image'
+import { Overlay, Popover, Button } from 'react-bootstrap'
 
 const navigationListAuthenticated = [
     {
@@ -106,62 +106,82 @@ const navigationListNotAuthenticated = [
 ]
 
 const NavigationBar = () => {
-    const { user, signOut } = useContext(GlobalState)
-    const [navSelect, setNavSelect] = useState(null)
-    const menuRef = useRef()
+    const { user } = useContext(GlobalState)
+    const [target, setTarget] = useState(null)
+    const [show, setShow] = useState(true)
+    const [dynamicChildren, setDynamicChildren] = useState([])
     const navRef = useRef()
-    const handleNavSelect = (index) => {
-        navSelect == index ? setNavSelect(null) : setNavSelect(index)
+
+    const handleNavSelect = (event, children) => {
+        // dynamicChildren[0] != children[0] ? setShow(true) : setShow(true)
+        event.target == target ? setShow(!show) : setShow(true)
+        setTarget(event.target)
+        setDynamicChildren(children)
     }
 
     const hideNavSelect = (e) => {
-        navSelect != null && navRef.current != e.target && setNavSelect(null)
+        // setShow(false)
+        // target == e.target && setShow(false)
+        !navRef.current.contains(e.target) && setShow(false)
     }
 
     useEffect(() => {
-        navRef.current != null && TweenMax.from(navRef.current, .25, { height: 0 })
         // TweenMax.from(menuRef.current, 1, { opacity: 0 })
         document.addEventListener('click', hideNavSelect)
         return () => document.removeEventListener('click', hideNavSelect)
-    }, [navSelect, navRef])
+    }, [])
 
     return (
-        <div className="navigationBar">
+        <div className="navigationBar" ref={navRef}>
             <Link href='/'>
                 <a className="main">
                     หน้าแรก
                 </a>
             </Link>
+
             {
-                !user && navigationListAuthenticated.map((navigation, index) => {
-                    const { name, children } = navigation
+                navigationListAuthenticated.map((navigation, index) => {
+                    const { name } = navigation
                     return <div
                         className="navbar-menu"
                         key={index}
-                        onClick={(e) => {
-                            handleNavSelect(index)
-                        }}
+                        onClick={e => handleNavSelect(e, navigation.children)}
                     >
-                        <Image className="img" src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
-                        <div>{name}<DownOutlined /></div>
-                        {
-                            navSelect === index && <div
-                                ref={navRef}
-                                className="nav-select"
-                            >
-                                {
-                                    children.map((child, indexChild) => {
-                                        const { name, url } = child
-                                        return <Link key={indexChild} href={url}>
-                                            <a ref={menuRef} className="text-nav" >{name}</a>
-                                        </Link>
-                                    })
-                                }
-                            </div>
-                        }
+                        <Image style={{ marginRight: 5 }} src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
+                        <p>{name}</p>
+                        <Image src="/down-arrow.svg" width={10} height={10} alt="down-arrow" />
                     </div>
                 })
             }
+
+            {
+                navigationListAuthenticated.map(navigation => {
+                    return <Overlay
+                        show={show}
+                        target={target}
+                        placement="bottom"
+                        container={navRef.current}
+                        // containerPadding={20}
+                        className="nav-select"
+                    >
+                        <Popover id="popover-contained">
+                            <Popover.Content>
+                                <div style={{ display: "flex", flexDirection: "column" }}>
+                                    {
+                                        dynamicChildren && dynamicChildren.map((child, indexChild) => {
+                                            const { name, url } = child
+                                            return <Link key={indexChild} href={url}>
+                                                <a className="text-nav">{name}</a>
+                                            </Link>
+                                        })
+                                    }
+                                </div>
+                            </Popover.Content>
+                        </Popover>
+                    </Overlay>
+                })
+            }
+
             {/* {
                 !user && navigationListNotAuthenticated.map((navigation, index) => {
                     const { name, children } = navigation
@@ -192,8 +212,7 @@ const NavigationBar = () => {
                     </div>
                 })
             } */}
-
-        </div>
+        </div >
     )
 }
 

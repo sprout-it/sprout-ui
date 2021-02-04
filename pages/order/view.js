@@ -95,9 +95,9 @@ const View = () => {
 
                 {/* <Spin spinning={isLoading} tip="Loading"> */}
                 <div className="view-table-wraper">
-                    <Table striped bordered hover>
+                    <Table striped hover="true">
                         <thead>
-                            <tr className="table-success">
+                            <tr bordered hover className="table-success">
                                 <th>#</th>
                                 <th>No.</th>
                                 <th>รหัส Tracking Code</th>
@@ -109,9 +109,9 @@ const View = () => {
                         <tbody>
                             {
                                 data ? data.map((item, key) =>
-                                    <tr className="table-success" key={key}>
+                                    <tr key={key}>
                                         {/* <td><input type="checkbox" /></td> */}
-                                        <td className="table-success">{key + 1}</td>
+                                        <td>{key + 1}</td>
                                         <td>{item.tracking_code}</td>
                                         <td>{item.courier_tracking_code}</td>
                                         <td>{item.to.name}</td>

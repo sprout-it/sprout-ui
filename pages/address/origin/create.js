@@ -4,6 +4,7 @@ import Container from '../../../component/Container'
 import { firestore } from '../../../utils/firebase'
 import { message } from 'antd'
 import Router from 'next/router'
+import { InputGroup, FormControl, Button, Table } from 'react-bootstrap'
 
 const Create = () => {
     const { register, getValues, errors } = useForm()
@@ -18,9 +19,9 @@ const Create = () => {
     return (
         <div className="address-create">
             <Container>
-                <table>
+                <Table>
                     <thead>
-                        <tr>
+                        <tr className="table-success">
                             <th>
                                 ต้นทาง / ผู้จัดส่ง
                             </th>
@@ -31,31 +32,55 @@ const Create = () => {
                             <td>
                                 <form className="address-create-form">
                                     <div>
-                                        <label>ชื่อผู้ส่ง</label>
-                                        <input ref={register} name="name" type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    ชื่อผู้ส่ง
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl ref={register} name="name" type="text" />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>เบอร์โทร</label>
-                                        <input ref={register} name="tel" type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    เบอร์โทร
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl ref={register} name="tel" type="text" />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>ที่อยู่</label>
-                                        <input ref={register} name="address" type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    ที่อยู่
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl ref={register} name="address" type="text" />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>รหัสไปรษณีย์</label>
-                                        <input ref={register} name="postCode" type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    รหัสไปรษณีย์
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl ref={register} name="postCode" type="text" />
+                                        </InputGroup>
                                     </div>
                                 </form>
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </Table>
             </Container>
             <Container>
-                <table>
+                <Table hover>
                     <thead>
-                        <tr>
+                        <tr className="table-success">
                             <th>
                                 บันทึกรายการ
                             </th>
@@ -64,11 +89,11 @@ const Create = () => {
                     <tbody>
                         <tr>
                             <td>
-                                <button type="submit" onClick={submit}>สร้างที่อยู่</button>
+                                <Button type="submit" variant="info" size="lg" onClick={submit}>สร้างที่อยู่</Button>
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </Table>
             </Container>
         </div>
     )

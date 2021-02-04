@@ -2,6 +2,7 @@ import React from 'react'
 import { Tabs, Button } from 'antd';
 const { TabPane } = Tabs;
 import Container from '../../component/Container'
+import { Table } from 'react-bootstrap'
 
 const Receipt = () => {
     return (
@@ -18,8 +19,8 @@ const Receipt = () => {
                         </span>
                         <Button>ค้นหา</Button>
                         <div className="table-wraper">
-                            <table>
-                                <tr>
+                            <Table striped hover>
+                                <tr className="table-success">
                                     <th>#</th>
                                     <th>วันที่ใบเสร็จ</th>
                                     <th>เลขที่ใบเสร็จรับเงิน</th>
@@ -33,7 +34,7 @@ const Receipt = () => {
                                     <td>Address</td>
                                     <td>Address</td>
                                 </tr>
-                            </table>
+                            </Table>
                         </div>
                     </TabPane>
                     <TabPane tab="ใบเสร็จรับเงิน (ประกันเสริม)" key="2">
@@ -45,8 +46,8 @@ const Receipt = () => {
                         </span>
                         <Button>ค้นหา</Button>
                         <div className="table-wraper">
-                            <table>
-                                <tr>
+                            <Table striped hover>
+                                <tr className="table-success">
                                     <th>#</th>
                                     <th>วันที่ออกใบเสร็จ</th>
                                     <th>เลขที่ใบเสร็จ</th>
@@ -62,7 +63,7 @@ const Receipt = () => {
                                     <td>Address</td>
                                     <td>Address</td>
                                 </tr>
-                            </table>
+                            </Table>
                         </div>
                     </TabPane>
                 </Tabs>

@@ -1,0 +1,4 @@
+.profile-container {
+    width: 100vw;
+    min-height: calc(100vh - 64px - 100px);
+}

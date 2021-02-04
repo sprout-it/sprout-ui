@@ -22,6 +22,8 @@ import './styles/purchase.css'
 import './styles/problam.css'
 import './styles/invoice.css'
 import './styles/receipt.css'
+import './styles/profile.css'
+import './styles/courier_rate.css'
 import 'antd/dist/antd.css';
 import 'react-phone-input-2/lib/high-res.css'
 import 'chart.js/dist/Chart.bundle.min.js'

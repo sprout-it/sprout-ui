@@ -2,15 +2,15 @@ import React, { useEffect, useState, useRef } from 'react'
 import useFetch from 'use-http'
 import { useForm } from 'react-hook-form'
 import { firestore } from '../../utils/firebase'
-import { Button } from 'antd'
 import Container from '../../component/Container'
+import { InputGroup, FormControl, Button, Table, DropdownButton, Dropdown } from 'react-bootstrap'
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { NEXT_PUBLIC_API_KEY } = process.env
 
 const Create = () => {
     const dataRef = firestore.collection('order')
-    const { register, handleSubmit, errors } = useForm()
+    const { register, handleSubmit, errors, getValues } = useForm()
     const [dynamicTo, setDynamicTo] = useState([{ showMore: false }])
     const [update, setUpdate] = useState(0)
     const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/booking/`, { cachePolicy: 'no-cache', })
@@ -72,11 +72,12 @@ const Create = () => {
             <h1>สร้างรายการ</h1>
             <form className="create-box" onSubmit={handleSubmit(onSubmit)}>
                 <Container>
-                    <table>
+                    <Table>
                         <thead>
-                            <tr>
+                            <tr className="table-success">
                                 <th>
                                     <h2>ต้นทาง / ผู้จัดส่ง</h2>
+                                    <Button onClick={() => console.log(getValues())}>Show</Button>
                                 </th>
                             </tr>
                         </thead>
@@ -88,34 +89,64 @@ const Create = () => {
                                         <input name="api_key" ref={register} type="text" />
                                     </div> */}
                                     <div>
-                                        <label>email</label>
-                                        <input name="email" ref={register} type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    email
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl name="email" ref={register} type="text" />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>ชื่อ - นามสกุล</label>
-                                        <input name={`from.name`} ref={register} />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    ชื่อ - นามสกุล
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl name={`from.name`} ref={register} />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>ที่อยู่</label>
-                                        <input name={`from.address`} ref={register} type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    ที่อยู่
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl name={`from.address`} ref={register} type="text" />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>รหัสไปรษณีย์</label>
-                                        <input name={`from.postcode`} ref={register} type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    รหัสไปรษณีย์
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl name={`from.postcode`} ref={register} type="text" />
+                                        </InputGroup>
                                     </div>
                                     <div>
-                                        <label>เบอร์โทร</label>
-                                        <input name={`from.tel`} ref={register} type="text" />
+                                        <InputGroup>
+                                            <InputGroup.Prepend>
+                                                <InputGroup.Text>
+                                                    เบอร์โทร
+                                                </InputGroup.Text>
+                                            </InputGroup.Prepend>
+                                            <FormControl name={`from.tel`} ref={register} type="text" />
+                                        </InputGroup>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </Table>
                 </Container>
                 <Container>
-                    <table>
+                    <Table>
                         <thead>
-                            <tr>
+                            <tr className="table-success">
                                 <th>
                                     <h2>ปลายทาง / ผู้รับ</h2>
                                 </th>
@@ -129,67 +160,132 @@ const Create = () => {
                                             {dynamicTo.length - 1 == key && key != 0 && <div className="remove" onClick={removeLastDest}>-</div>}
                                             <div>
                                                 <div>
-                                                    <label>ชื่อ - นามสกุล</label>
-                                                    <input onInput={() => addMore(key)} name={`data[${key}].to.name`} ref={register} />
+                                                    <InputGroup>
+                                                        <InputGroup.Prepend>
+                                                            <InputGroup.Text>
+                                                                ชื่อ - นามสกุล
+                                                            </InputGroup.Text>
+                                                        </InputGroup.Prepend>
+                                                        <FormControl onInput={() => addMore(key)} name={`data[${key}].to.name`} ref={register} />
+                                                    </InputGroup>
                                                 </div>
                                                 <div>
-                                                    <label>ที่อยู่</label>
-                                                    <input onInput={() => addMore(key)} name={`data[${key}].to.address`} ref={register} type="textArea" />
+                                                    <InputGroup>
+                                                        <InputGroup.Prepend>
+                                                            <InputGroup.Text>
+                                                                ที่อยู่
+                                                            </InputGroup.Text>
+                                                        </InputGroup.Prepend>
+                                                        <FormControl onInput={() => addMore(key)} name={`data[${key}].to.address`} ref={register} type="textArea" />
+                                                    </InputGroup>
                                                 </div>
                                                 <div>
-                                                    <label>รหัสไปรษณีย์</label>
-                                                    <input onInput={() => addMore(key)} name={`data[${key}].to.postcode`} ref={register} type="text" />
+                                                    <InputGroup>
+                                                        <InputGroup.Prepend>
+                                                            <InputGroup.Text>
+                                                                รหัสไปรษณีย์
+                                                            </InputGroup.Text>
+                                                        </InputGroup.Prepend>
+                                                        <FormControl onInput={() => addMore(key)} name={`data[${key}].to.postcode`} ref={register} type="text" />
+                                                    </InputGroup>
                                                 </div>
                                                 <div>
-                                                    <label>เบอร์โทร</label>
-                                                    <input onInput={() => addMore(key)} name={`data[${key}].to.tel`} ref={register} type="text" />
+                                                    <InputGroup>
+                                                        <InputGroup.Prepend>
+                                                            <InputGroup.Text>
+                                                                เบอร์โทร
+                                                            </InputGroup.Text>
+                                                        </InputGroup.Prepend>
+                                                        <FormControl onInput={() => addMore(key)} name={`data[${key}].to.tel`} ref={register} type="text" />
+                                                    </InputGroup>
                                                 </div>
                                             </div>
                                             {/* <h2>พัสดุไปรษณีย์ </h2> */}
                                             {
                                                 item.showMore && <div>
                                                     <div>
-                                                        <label>ชื่อ</label>
-                                                        <input name={`data[${key}].parcel.name`} ref={register} type="text" />
+                                                        <InputGroup>
+                                                            <InputGroup.Prepend>
+                                                                <InputGroup.Text>
+                                                                    ชื่อ
+                                                            </InputGroup.Text>
+                                                            </InputGroup.Prepend>
+                                                            <FormControl name={`data[${key}].parcel.name`} ref={register} type="text" />
+                                                        </InputGroup>
                                                     </div>
                                                     <div>
-                                                        <label>น้ำหนัก</label>
-                                                        <input name={`data[${key}].parcel.weight`} ref={register} type="text" />
+                                                        <InputGroup>
+                                                            <InputGroup.Prepend>
+                                                                <InputGroup.Text>
+                                                                    น้ำหนัก
+                                                            </InputGroup.Text>
+                                                            </InputGroup.Prepend>
+                                                            <FormControl name={`data[${key}].parcel.weight`} ref={register} type="text" />
+                                                        </InputGroup>
                                                     </div>
                                                     <div>
-                                                        <label>ความกว้าง</label>
-                                                        <input name={`data[${key}].parcel.width`} ref={register} type="text" />
+                                                        <InputGroup>
+                                                            <InputGroup.Prepend>
+                                                                <InputGroup.Text>
+                                                                    ความกว้าง
+                                                            </InputGroup.Text>
+                                                            </InputGroup.Prepend>
+                                                            <FormControl name={`data[${key}].parcel.width`} ref={register} type="text" />
+                                                        </InputGroup>
                                                     </div>
                                                     <div>
-                                                        <label>ความยาว</label>
-                                                        <input name={`data[${key}].parcel.length`} ref={register} type="text" />
+                                                        <InputGroup>
+                                                            <InputGroup.Prepend>
+                                                                <InputGroup.Text>
+                                                                    ความยาว
+                                                            </InputGroup.Text>
+                                                            </InputGroup.Prepend>
+                                                            <FormControl name={`data[${key}].parcel.length`} ref={register} type="text" />
+                                                        </InputGroup>
                                                     </div>
                                                     <div>
-                                                        <label>ความสูง</label>
-                                                        <input name={`data[${key}].parcel.height`} ref={register} type="text" />
+                                                        <InputGroup>
+                                                            <InputGroup.Prepend>
+                                                                <InputGroup.Text>
+                                                                    ความสูง
+                                                            </InputGroup.Text>
+                                                            </InputGroup.Prepend>
+                                                            <FormControl name={`data[${key}].parcel.height`} ref={register} type="text" />
+                                                        </InputGroup>
                                                     </div>
                                                     <div>
-                                                        <label>Courier Code</label>
-                                                        <select name={`data[${key}].courier_code`} ref={register} className="form-control">
-                                                            <option value="THP">ไปรษณีย์ไทย EMS</option>
-                                                            <option value="TP2">ไปรษณีย์ ลงทะเบียน</option>
-                                                            <option value="APF">Alphafast</option>
-                                                            <option value="KRY">Kerry Express</option>
-                                                            <option value="RSB">Rush Bike</option>
-                                                            <option value="SKT">Skootar</option>
-                                                            <option value="SCG">SCG Yamato Express</option>
-                                                            <option value="SCGC">SCG Yamato Express Chilled</option>
-                                                            <option value="SCGF">SCG Yamato Express Frozen</option>
-                                                            <option value="DHL">DHL</option>
-                                                            <option value="LLM">Lalamove</option>
-                                                            <option value="NKS">Niko Logistic</option>
-                                                            <option value="NJV">Ninjavan</option>
-                                                            <option value="CJE">CJ Logistics</option>
-                                                            <option value="FLE">Flash Express</option>
-                                                            <option value="JNTP">J&T Express Pickup </option>
-                                                            <option value="JNTD">J&T Express Dropoff </option>
-                                                            <option value="POM">Popman</option>
-                                                        </select>
+                                                        <InputGroup>
+                                                            <DropdownButton
+                                                                as={InputGroup.Append}
+                                                                variant="outline-secondary"
+                                                                title="Courier Code"
+                                                                id="input-group-dropdown-2"
+                                                                name={`data[${key}].courier_code`}
+                                                                ref={register}
+                                                                defaultValue="THP"
+                                                            >
+                                                                <Dropdown.Item value="THP">ไปรษณีย์ไทย EMS</Dropdown.Item>
+                                                                <Dropdown.Item value="TP2">ไปรษณีย์ ลงทะเบียน</Dropdown.Item>
+                                                                <Dropdown.Item value="APF">Alphafast</Dropdown.Item>
+                                                                <Dropdown.Item value="KRY">Kerry Express</Dropdown.Item>
+                                                                <Dropdown.Item value="RSB">Rush Bike</Dropdown.Item>
+                                                                <Dropdown.Item value="SKT">Skootar</Dropdown.Item>
+                                                                <Dropdown.Item value="SCG">SCG Yamato Express</Dropdown.Item>
+                                                                <Dropdown.Item value="SCGC">SCG Yamato Express Chilled</Dropdown.Item>
+                                                                <Dropdown.Item value="SCGF">SCG Yamato Express Frozen</Dropdown.Item>
+                                                                <Dropdown.Item value="DHL">DHL</Dropdown.Item>
+                                                                <Dropdown.Item value="LLM">Lalamove</Dropdown.Item>
+                                                                <Dropdown.Item value="NKS">Niko Logistic</Dropdown.Item>
+                                                                <Dropdown.Item value="NJV">Ninjavan</Dropdown.Item>
+                                                                <Dropdown.Item value="CJE">CJ Logistics</Dropdown.Item>
+                                                                <Dropdown.Item value="FLE">Flash Express</Dropdown.Item>
+                                                                <Dropdown.Item value="JNTP">J&T Express Pickup </Dropdown.Item>
+                                                                <Dropdown.Item value="JNTD">J&T Express Dropoff </Dropdown.Item>
+                                                                <Dropdown.Item value="POM">Popman</Dropdown.Item>
+                                                            </DropdownButton>
+                                                            <Dropdown.Divider />
+                                                            <FormControl />
+                                                        </InputGroup>
                                                     </div>
                                                 </div>
                                             }
@@ -203,7 +299,7 @@ const Create = () => {
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </Table>
                 </Container>
             </form>
         </div >

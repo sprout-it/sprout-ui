@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
     return (
         <div className="footer">
-            © Copyright 2015 - 2021 All Rights Reserved by SHIPPOP
+            © Copyright 2021 All Rights Reserved by Sproutstory
         </div>
     )
 }

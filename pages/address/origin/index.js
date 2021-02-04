@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Router from 'next/router'
 import { firestore } from '../../../utils/firebase'
+import { Table, Button } from 'react-bootstrap'
 
 const Address = () => {
     const [originData, setOriginData] = useState([])
@@ -23,12 +24,12 @@ const Address = () => {
         <div className="address-container">
             <div className="profile-header">
                 <h1>ต้นทาง/ผู้จัดส่ง</h1>
-                <button onClick={createRoute}>สร้างที่อยู่ใหม่</button>
+                <Button variant="success" size="small" onClick={createRoute}>สร้างที่อยู่ใหม่</Button>
             </div>
             <div className="address-table-wraper">
-                <table>
+                <Table striped hover>
                     <thead>
-                        <tr>
+                        <tr className="table-success">
                             <th>#</th>
                             <th>ชื่อผู้ส่ง</th>
                             <th>ที่อยู่</th>
@@ -47,7 +48,7 @@ const Address = () => {
                             )
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
     )

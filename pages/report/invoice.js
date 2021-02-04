@@ -1,14 +1,14 @@
 import React from 'react'
 import Container from '../../component/Container'
-
+import { Table } from 'react-bootstrap'
 const Invoice = () => {
     return (
         <div className="invoice-container">
             <h1>รายการค้างชำระ</h1>
             <Container>
                 <div className="table-wraper">
-                    <table>
-                        <tr>
+                    <Table striped hover>
+                        <tr className="table-success">
                             <th>#</th>
                             <th>เลขที่ใบแจ้งหนี้</th>
                             <th>เดือน</th>
@@ -26,7 +26,7 @@ const Invoice = () => {
                             <td>Address</td>
                             <td>Address</td>
                         </tr>
-                    </table>
+                    </Table>
                 </div>
             </Container>
         </div>

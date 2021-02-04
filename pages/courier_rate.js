@@ -2,7 +2,7 @@ import React from 'react'
 
 const Courier_rate = () => {
     return (
-        <div>
+        <div className="courier-rate-container">
             
         </div>
     )

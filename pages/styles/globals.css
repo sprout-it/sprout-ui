@@ -25,39 +25,9 @@ a {
   padding: 50px;
 }
 
-/* th:nth-child(1) {
-  width: 5px;
-} */
-
-/* .table-wraper {
-  margin: 0 auto 0 auto;
-  min-width: 700px;
-}
-
-table {
-  margin: 0 auto 0 auto;
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-}
-
 th {
-  border: 1px solid #dddddd;
-  background: rgb(177, 235, 208);
-  background: linear-gradient(69deg, rgba(177, 235, 208, 1) 0%, rgba(54, 230, 148, 1) 100%);
-  padding: 8px;
-  white-space: nowrap;
+  text-align: center;
 }
-
-table {
-  position: relative;
-}
-
-td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  white-space: nowrap;
-} */
 
 @media only screen and (max-width:320px) {
   .table-wraper {

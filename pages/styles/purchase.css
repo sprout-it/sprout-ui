@@ -12,4 +12,12 @@
     margin: 0 auto 0 auto;
     width: fit-content;
     min-width: 320px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-purchase {
+    margin: 5px;
 }

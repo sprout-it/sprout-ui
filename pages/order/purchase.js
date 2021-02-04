@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Container from '../../component/Container'
 import { firestore } from '../../utils/firebase'
-import { Button } from 'antd'
 import useFetch from 'use-http'
+import { Button, Table, Pagination } from 'react-bootstrap'
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { NEXT_PUBLIC_API_KEY } = process.env
@@ -42,9 +42,9 @@ const Purchase = () => {
         <div className="purchase-container">
             <h1>รายการจากรหัสใบสั่งซื้อ</h1>
             <Container>
-                <table>
+                <Table striped hover>
                     <thead>
-                        <tr>
+                        <tr className="table-success">
                             <th></th>
                             <th>#</th>
                             <th>รหัสใบสั่งซื้อ</th>
@@ -63,15 +63,22 @@ const Purchase = () => {
                                     <td>{Object.entries(item.from).length}</td>
                                     <td>{item.created}</td>
                                     <td>
-                                        <Button type="ghost" onClick={getPrint}>พิมพ์ใบปะหน้า</Button>
-                                        <Button ref={downloadRef} type="ghost"><a href={printData} download>ใบจัดส่งสินค้า</a></Button>
-                                        <Button type="ghost">ตรวจสอบใบสั่งซื้อ</Button>
+                                        <Button variant="primary" className="btn-purchase" onClick={getPrint}>พิมพ์ใบปะหน้า</Button>
+                                        <Button variant="info" ref={downloadRef} className="btn-purchase"><a href={printData} download>ใบจัดส่งสินค้า</a></Button>
+                                        <Button variant="success" className="btn-purchase">ตรวจสอบใบสั่งซื้อ</Button>
                                     </td>
                                 </tr>
                             ) : ""
                         }
                     </tbody>
-                </table>
+                </Table>
+                <Pagination style={{ margin: "auto" }}>
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    <Pagination.Item>{1}</Pagination.Item>
+                    <Pagination.Next />
+                    <Pagination.Last />
+                </Pagination>
             </Container>
         </div >
     )

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Select, Button } from 'antd';
 import Container from '../../component/Container'
 import { firestore } from '../../utils/firebase'
+import { Table } from 'react-bootstrap'
 
 const Report = () => {
     const options = ["ทั้งหมด", "ยืนยันแล้ว", "ระหว่างจัดส่ง", "สำเร็จ", "เกิดข้อผิดพลาด"]
@@ -41,9 +42,9 @@ const Report = () => {
             </Container>
 
             <Container>
-                <table>
+                <Table striped hover>
                     <thead>
-                        <tr>
+                        <tr className="table-success">
                             <th>#</th>
                             <th>No.</th>
                             <th>รหัส Tracking Code</th>
@@ -66,7 +67,7 @@ const Report = () => {
                         }
                         <td><input type="checkbox" /></td>
                     </tbody>
-                </table>
+                </Table>
             </Container>
         </div>
     )

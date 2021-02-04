@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import dynamic from "next/dynamic";
 import Container from '../component/Container'
-import { Spin } from 'antd'
-import gsap from 'gsap'
+import { Table, InputGroup, FormControl } from 'react-bootstrap'
 
 const Chart = dynamic(
   () => import("../component/Chart"),
@@ -21,20 +20,21 @@ const Index = () => {
       {/* <Spin spinning={loading}> */}
       <Container>
         <div className="index-name">
-          <button type="button" className="btn btn-primary">Primary</button>
-          ทดสอบ
+          สวัสดีคุณ ผู้ใช้
             </div>
       </Container>
       <Container>
         <div className="index-chart">
           <form>
             <div className="select">เลือกช่วงวันที่ต้องการ</div>
-            <div className="index-input-datarange">
-              <input type="date" name="datetime-start" placeholder="yyyy-mm-dd" />
-              <span className="input-group-addon">ถึง</span>
-              <input type="date" name="datetime-end" placeholder="yyyy-mm-dd" />
+            <InputGroup className="index-input-datarange mb-3">
+              <FormControl type="date" name="datetime-start" placeholder="yyyy-mm-dd" />
+              <InputGroup.Prepend className="input-group-addon">
+                <InputGroup.Text>ถึง</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl type="date" name="datetime-end" placeholder="yyyy-mm-dd" />
               <button className="btn btn-info btn-search-summary btn-search" data-search="summary" data-mode="get">แสดงข้อมูล</button>
-            </div>
+            </InputGroup>
           </form>
         </div>
       </Container>
@@ -53,9 +53,9 @@ const Index = () => {
 
       <Container>
         <div className="index-table-wraper">
-          <table>
+          <Table striped hover>
             <thead ref={fixedRef}>
-              <tr>
+              <tr className="table-success">
                 <th>รหัส Tracking Code</th>
                 <th>รหัสติดตามพัสดุจากขนส่ง</th>
                 <th>ที่อยู่ปลายทาง</th>
@@ -86,7 +86,7 @@ const Index = () => {
                 <td>Address</td>
               </tr>
             </tbody>
-          </table>
+          </Table>
         </div>
       </Container>
       {/* </Spin> */}
