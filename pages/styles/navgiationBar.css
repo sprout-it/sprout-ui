@@ -1,13 +1,14 @@
 /* Desktop */
 
 @media (min-width:768px) {
-    .navigationBar {
+    .nav-mobile-container {
+        display: none;
+    }
+    .nav-desktop-container {
         display: flex;
         justify-content: flex-end;
         flex-direction: row;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        /* background: rgb(31, 255, 132); */
-        /* background: linear-gradient(90deg, rgba(31, 255, 132, 1) 0%, rgba(23, 209, 107, 1) 100%); */
     }
     .navbar-menu {
         cursor: pointer;
@@ -55,53 +56,57 @@
         padding: 20px;
         background: #D0E6A5;
     }
-}
-
-.navbar-menu>p {
-    margin: 0 3px 0 3px;
-}
-
-.navbar-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.navbar-menu>div:nth-child(1) {
-    margin: 3px 5px 0 0;
-    width: 20px;
+    .navbar-menu>p {
+        margin: 0 3px 0 3px;
+    }
+    .navbar-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .navbar-menu>div:nth-child(1) {
+        margin: 3px 5px 0 0;
+        width: 20px;
+    }
+    .ham-menu {
+        display: none;
+    }
 }
 
 /* Mobile */
 
 @media (max-width:768px) {
-    .navigationBar {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
+    .nav-desktop-container {
+        display: none;
     }
-    .navbar-menu:hover {
-        cursor: pointer;
-        justify-items: center;
-        /* background: rgb(31, 255, 132); */
+    .ham-menu {
+        position: fixed;
+        display: block;
+        margin: 20px;
     }
-    .navbar-menu {
-        cursor: pointer;
-        justify-items: center;
-    }
-    .text-nav {
-        margin: 0;
-    }
-    .text-nav:hover {
-        background: #D0E6A5;
-        margin: 0;
-    }
-    .nav-select {
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
+    .nav-mobile-container {
+        display: none;
+        position: absolute;
+        width: 50vw;
+        height: 100vh;
+        flex-flow: column nowrap;
+        background: #f5f5f5;
         z-index: 1;
-        overflow: hidden;
-        background: #DCDCDC;
+    }
+    .nav-mobile-container>.card, .card {
+        background: #d1f1c9;
+    }
+    .mobile-nav-menu {
+        display: flex;
+    }
+    .mobile-list-url {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .mobile-text-nav {
+        padding: 5px;
+    }
+    .mobile-nav-menu>p {
+        margin: 0 5px 0 5px;
     }
 }
