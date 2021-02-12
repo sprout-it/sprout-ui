@@ -4,12 +4,28 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "public": "public",
     "cleanUrls": true,
-    "public": "out",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "nextjs-server"
+      }
+    ]
+  },
+  "functions": {
+    "source": ".",
+    "runtime": "nodejs12",
     "ignore": [
       "firebase.json",
+      "firbease-debug.log",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "components/**",
+      "pages/**",
+      "public/**",
+      "readme.md",
+      "cypress/**"
     ]
   },
   "emulators": {

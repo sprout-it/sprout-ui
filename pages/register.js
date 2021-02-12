@@ -5,18 +5,18 @@ import Router from 'next/router'
 import { Button, Form } from 'react-bootstrap'
 import { message } from 'antd'
 
-const Login = () => {
+const Register = () => {
     const [form, setForm] = useState({
         email: '', password: ''
     })
 
     const handleSubmit = () => {
         const { email, password } = form
-        auth.signInWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
             .then(res => {
                 if (res.user) {
-                    message.success('ท่านเข้าสู่ระบบแล้ว')
-                    Router.push('/')
+                    message.success('สมัครสมาชิกแล้วระบบจะพาท่านไปยังหน้าเข้าสู่ระบบ')
+                    Router.push('login')
                 }
             })
             .catch(err => console.error(err))
@@ -32,7 +32,7 @@ const Login = () => {
 
     return <div className="register-container">
         <Container>
-            <h1>Login</h1>
+            <h1>Register</h1>
             <Form method="post" onSubmit={e => {
                 e.preventDefault()
             }}>
@@ -41,16 +41,11 @@ const Login = () => {
                     <Form.Control size="lg" type="text" name="email" onChange={handleChange} />
                     <Form.Label>Password</Form.Label>
                     <Form.Control size="lg" type="password" name="password" onChange={handleChange} />
-                    <Button style={{ marginTop: 5 }} type="submit" onClick={handleSubmit}>Login</Button>
+                    <Button type="submit" onClick={handleSubmit}>Register</Button>
                 </Form.Group>
             </Form>
-            <div style={{ textAlign: 'center' }}>
-                <h2 >สมัครสมาชิก</h2>
-                <Button variant="success" style={{ marginTop: 5, marginBottom: 5 }} onClick={() => Router.push('/register')}>Register</Button>
-                <h6 >หากท่านยังไม่ได้เป็นสมาชิก</h6>
-            </div>
         </Container>
     </div>
 }
 
-export default Login
+export default Register

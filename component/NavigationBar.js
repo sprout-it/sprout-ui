@@ -3,7 +3,7 @@ import { TweenMax } from 'gsap'
 import Link from 'next/link'
 import GlobalState from '../utils/context'
 import Image from 'next/image'
-import { Overlay, Popover, Button, Accordion, Card, ListGroup } from 'react-bootstrap'
+import { Overlay, Popover, Accordion, Card, ListGroup } from 'react-bootstrap'
 
 const navigationListAuthenticated = [
     {
@@ -26,34 +26,34 @@ const navigationListAuthenticated = [
             //     name: 'สร้างรายการจากไฟล์',
             //     url: "/order/upload"
             // },
-            {
-                name: 'รายการขนส่งที่เกิดปัญหา',
-                url: "/report/order/problam"
-            }
+            // {
+            //     name: 'รายการขนส่งที่เกิดปัญหา',
+            //     url: "/report/order/problam"
+            // }
         ],
     },
-    {
-        name: 'รายงานทางบัญชี',
-        icon: "bill.svg",
-        children: [
-            {
-                name: 'รายงานทางบัญชี',
-                url: "/report"
-            },
-            {
-                name: 'รายการค้างชำระ',
-                url: "/report/invoice"
-            },
-            {
-                name: 'รายงานใบเสร็จรับเงิน',
-                url: "/report/receipt"
-            },
-            // {
-            //     name: 'รายงานความคุ้มครองพัสดุ',
-            //     url: "/report/order/insurance"
-            // }
-        ]
-    },
+    // {
+    //     name: 'รายงานทางบัญชี',
+    //     icon: "bill.svg",
+    //     children: [
+    //         {
+    //             name: 'รายงานทางบัญชี',
+    //             url: "/report"
+    //         },
+    //         {
+    //             name: 'รายการค้างชำระ',
+    //             url: "/report/invoice"
+    //         },
+    //         {
+    //             name: 'รายงานใบเสร็จรับเงิน',
+    //             url: "/report/receipt"
+    //         },
+    //         // {
+    //         //     name: 'รายงานความคุ้มครองพัสดุ',
+    //         //     url: "/report/order/insurance"
+    //         // }
+    //     ]
+    // },
     {
         name: 'ที่อยู่',
         icon: "address.svg",
@@ -139,6 +139,11 @@ const NavigationBar = () => {
         hamMenuRef.current.style.display = "none"
     }
 
+    const toggleMobileNav = () => {
+        hamMenuRef.current.style.display = "flex"
+        mobileNavRef.current.style.display = "none"
+    }
+
     useEffect(() => {
         // TweenMax.from(menuRef.current, 1, { opacity: 0 })
         document.addEventListener('click', hideNavSelect)
@@ -152,14 +157,16 @@ const NavigationBar = () => {
     return (
         <div>
             <div className="nav-desktop-container" ref={navRef}>
-                <Link href='/'>
-                    <a className="main">
-                        หน้าแรก
-                    </a>
-                </Link>
+                {
+                    user && <Link href='/'>
+                        <a className="main">
+                            หน้าแรก
+                        </a>
+                    </Link>
+                }
 
                 {
-                    navigationListAuthenticated.map((navigation, index) => {
+                    user && navigationListAuthenticated.map((navigation, index) => {
                         const { name } = navigation
                         return <div
                             className="navbar-menu"
@@ -174,8 +181,24 @@ const NavigationBar = () => {
                 }
 
                 {
-                    navigationListAuthenticated.map(navigation => {
+                    !user && navigationListNotAuthenticated.map((navigation, index) => {
+                        const { name } = navigation
+                        return <div
+                            className="navbar-menu"
+                            key={index}
+                            onClick={e => handleNavSelect(e, navigation.children)}
+                        >
+                            <Image style={{ marginRight: 5 }} src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
+                            <p>{name}</p>
+                            <Image src="/down-arrow.svg" width={10} height={10} alt="down-arrow" />
+                        </div>
+                    })
+                }
+
+                {
+                    user && navigationListAuthenticated.map(navigation => {
                         return <Overlay
+                            key={navigation.name}
                             show={show}
                             target={target}
                             placement="bottom"
@@ -200,56 +223,62 @@ const NavigationBar = () => {
                         </Overlay>
                     })
                 }
-
-                {/* {
-                !user && navigationListNotAuthenticated.map((navigation, index) => {
-                    const { name, children } = navigation
-                    return <div
-                        className="navbar-menu"
-                        key={index}
-                        onClick={(e) => {
-                            handleNavSelect(index)
-                        }}
-                    >
-                        <Image className="img" src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
-                        <div>{name}<DownOutlined /></div>
-                        {
-                            navSelect === index && <div
-                                ref={navRef}
-                                className="nav-select"
-                            >
-                                {
-                                    children.map((child, indexChild) => {
-                                        const { name, url } = child
-                                        return <Link key={indexChild} href={url}>
-                                            <a ref={menuRef} className="text-nav" >{name}</a>
-                                        </Link>
-                                    })
-                                }
-                            </div>
-                        }
-                    </div>
-                })
-            } */}
+                {
+                    !user && navigationListNotAuthenticated.map(navigation => {
+                        return <Overlay
+                            key={navigation.name}
+                            show={show}
+                            target={target}
+                            placement="bottom"
+                            container={navRef.current}
+                            // containerPadding={20}
+                            className="nav-select"
+                        >
+                            <Popover id="popover-contained">
+                                <Popover.Content>
+                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                        {
+                                            dynamicChildren && dynamicChildren.map((child, indexChild) => {
+                                                const { name, url } = child
+                                                return <Link key={indexChild} href={url}>
+                                                    <a className="text-nav">{name}</a>
+                                                </Link>
+                                            })
+                                        }
+                                    </div>
+                                </Popover.Content>
+                            </Popover>
+                        </Overlay>
+                    })
+                }
             </div>
+
             <div onClick={showMobileNav} className="ham-menu" ref={hamMenuRef}>
                 <Image src="/menu-button-of-three-horizontal-lines.svg" width={50} height={50} />
             </div>
             <Accordion defaultActiveKey="0" onClick={hideMobileNav} className="nav-mobile-container" ref={mobileNavRef}>
-                <Card className="nav-mobile-close" onClick={() => {
-                    hamMenuRef.current.style.display = "flex"
-                    mobileNavRef.current.style.display = "none"
-                }}>
-                    <ListGroup>
-                        <ListGroup.Item>
-                            Close
-                            </ListGroup.Item>
+                <Card onClick={toggleMobileNav}>
+                    <ListGroup id="nav-mobile-close">
+                        <ListGroup.Item id="nav-mobile-close-img">
+                            <Image src="/close-cross-in-circular-outlined-interface-button.svg" width={20} height={20} />
+                        </ListGroup.Item>
                     </ListGroup>
                 </Card>
+                {user && <Card>
+                    <ListGroup>
+                        <Link href='/'>
+                            <ListGroup.Item style={{ background: "#cae9c3" }}>
+                                <Image src="/home.svg" width={20} height={20} />
+                                <a style={{ marginLeft: 5, textDecoration: "none" }} className="main">หน้าแรก</a>
+                            </ListGroup.Item>
+                        </Link>
+                    </ListGroup>
+                </Card>
+                }
                 {
-                    navigationListAuthenticated.map((navigation, index) => {
+                    user && navigationListAuthenticated.map((navigation, index) => {
                         const { name } = navigation
-                        return <Card>
+                        return <Card className={index}>
                             <Accordion.Toggle as={Card.Header} eventKey={index.toString()} className="mobile-nav-menu">
                                 <Image style={{ marginRight: 5 }} src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
                                 <p>{name}</p>
@@ -259,7 +288,31 @@ const NavigationBar = () => {
                                 <ListGroup className="mobile-list-url">
                                     {navigation.children.map((item, key) => {
                                         const { name, url } = item
-                                        return <ListGroup.Item>
+                                        return <ListGroup.Item key={item.name} onClick={toggleMobileNav}>
+                                            <Link key={key} href={url}>
+                                                <a className="mobile-text-nav">{name}</a>
+                                            </Link>
+                                        </ListGroup.Item>
+                                    })}
+                                </ListGroup>
+                            </Accordion.Collapse>
+                        </Card>
+                    })
+                }
+                {
+                    !user && navigationListNotAuthenticated.map((navigation, index) => {
+                        const { name } = navigation
+                        return <Card className={index}>
+                            <Accordion.Toggle as={Card.Header} eventKey={index.toString()} className="mobile-nav-menu">
+                                <Image style={{ marginRight: 5 }} src={navigation.icon ? "/" + navigation.icon : "/"} width={20} height={20} alt="packages" />
+                                <p>{name}</p>
+                                <Image src="/down-arrow.svg" width={10} height={10} alt="down-arrow" />
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey={index.toString()}>
+                                <ListGroup className="mobile-list-url">
+                                    {navigation.children.map((item, key) => {
+                                        const { name, url } = item
+                                        return <ListGroup.Item key={key} onClick={toggleMobileNav}>
                                             <Link key={key} href={url}>
                                                 <a className="mobile-text-nav">{name}</a>
                                             </Link>

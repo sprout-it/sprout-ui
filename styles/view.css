@@ -1,4 +1,4 @@
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 280px) {
     .view-container {
         min-height: calc(100vh - 100px - 62px);
         width: 100vw;
@@ -6,7 +6,7 @@
         padding: 5px;
     }
     .view-container>.container {
-        min-width: 320px;
+        min-width: 280px;
         padding: 10px;
         display: flex;
         flex-direction: column;
@@ -25,14 +25,14 @@
 }
 
 .view-container {
-    min-height: calc(100vh - 100px - 62px);
+    min-height: calc(100vh - 100px);
     width: 100vw;
     background: #f5f5f5;
     padding: 20px;
 }
 
 .view-container>.container {
-    min-width: 320px;
+    min-width: 280px;
     /* width: 700px; */
     padding: 50px;
     display: flex;

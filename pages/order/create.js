@@ -77,7 +77,6 @@ const Create = () => {
                             <tr className="table-success">
                                 <th>
                                     <h2>ต้นทาง / ผู้จัดส่ง</h2>
-                                    <Button onClick={() => console.log(getValues())}>Show</Button>
                                 </th>
                             </tr>
                         </thead>

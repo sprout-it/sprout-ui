@@ -14,6 +14,7 @@ module.exports = {
             '/address/origin/create': { page: '/address/origin/create' },
             '/courier_rate': { page: '/courier_rate' },
             '/login': { page: '/login' },
+            '/register': { page: '/register' },
             '/profile': { page: '/profile' },
             '/reset_password': { page: '/reset_password' },
             '/order/view': { page: '/order/view' },

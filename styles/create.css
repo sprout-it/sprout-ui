@@ -14,9 +14,8 @@
 }
 
 .create-box>.container {
-    min-width: 320px;
-    width: 700px;
     margin: 20px auto 20px auto;
+    overflow-x: scroll;
 }
 
 .create-box>.container>table {
