@@ -36,3 +36,5 @@ config.js
 
 #log file
 *.log
+
+nextjs

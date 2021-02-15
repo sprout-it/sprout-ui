@@ -9,21 +9,17 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "nextjs-server"
+        "function": "nextjsServer"
       }
     ]
   },
   "functions": {
     "source": ".",
-    "runtime": "nodejs12",
     "ignore": [
       "firebase.json",
       "firbease-debug.log",
       "**/.*",
       "**/node_modules/**",
-      "components/**",
-      "pages/**",
-      "public/**",
       "readme.md",
       "cypress/**"
     ]
