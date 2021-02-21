@@ -6,12 +6,14 @@ const bodyParser = require('body-parser')
 const isDev = process.env.DEVELOPMENT == 'true' || false
 const axios = require('axios')
 
+console.log(process.env.DEVELOPMENT)
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 })
 
 const app = next({
-    // dev: false,
+    dev: false,
     conf: { distDir: 'nextjs' }
 });
 
@@ -20,27 +22,41 @@ const cors = require('cors');
 const expressServer = express()
 const handle = app.getRequestHandler();
 
-// expressServer.use(cors({ origin: true }))
+expressServer.use(cors({ origin: true }))
 expressServer.use(bodyParser.json());
 
 expressServer.all('/proxy/*', async (req, res) => {
     const [endPointUrl] = Object.values(req.params)
-    axios({
+    const getData = await axios({
         method: req.method,
         url: endPointUrl,
-        data: req.body.length > 0 ? req.body : undefinded
+        data: req.body.length > 0 ? req.body : undefined
     });
+    res.send(getData.data)
+    res.end()
 })
 
-expressServer.all('*', async (req, res) => {
+!isDev && expressServer.all('*', async (req, res) => {
     return await handle(req, res)
 });
 
-// expressServer.listen(80, () => console.log('listen at 80'))
+isDev && (async () => {
+    try {
+        await app.prepare();
+        const server = express();
+        server.all("*", (req, res) => {
+            return handle(req, res);
+        });
+        server.listen(port, (err) => {
+            if (err) throw err;
+            console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
+        });
+    } catch (e) {
+        console.error(e);
+        process.exit(1);
+    }
+})();
 
-// const server = functions.https.onRequest((req, res) => {
-//     return app.prepare().then(() => handle(req, res))
-// })
 isDev && expressServer.listen(3000, () => console.log(`Running on port: 3000`))
 const server = functions.https.onRequest(expressServer)
 exports.nextjs = { server };

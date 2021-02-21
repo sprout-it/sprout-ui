@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env DEVELOPMENT=true npx node index.js",
+    "dev": "cross-env DEVELOPMENT=true next dev",
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",

@@ -6,11 +6,12 @@ import { Button, Table, Pagination } from 'react-bootstrap'
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { NEXT_PUBLIC_API_KEY } = process.env
+const { NEXT_PUBLIC_PROXY } = process.env
 
 const Purchase = () => {
     const [data, setData] = useState([])
     const orderRef = firestore.collection('order')
-    const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/label`, { cachePolicy: "no-cache" })
+    const { post, loading, error, response } = useFetch(`${NEXT_PUBLIC_PROXY}${NEXT_PUBLIC_ENDPOINT_URL}/label`, { cachePolicy: "no-cache" })
     const downloadRef = useRef();
     const [printData, setPrintData] = useState()
     const getOrderValue = async (limit) => {

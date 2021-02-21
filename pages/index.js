@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 import dynamic from "next/dynamic";
-import Container from '../component/Container'
-import { Table, InputGroup, FormControl } from 'react-bootstrap'
-
+import { Table, InputGroup, FormControl, Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
+import { useRouter } from 'next/router'
 const Chart = dynamic(
   () => import("../component/Chart"),
   { ssr: false }
 );
 
-const Index = () => {
+const Index = (props) => {
+  const { hello } = props
   const fixedRef = useRef()
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -16,82 +16,126 @@ const Index = () => {
   }, [])
 
   return (
-    <div className="App">
+    <Container fluid={true}>
       {/* <Spin spinning={loading}> */}
-      <Container>
-        <div className="index-name">
-          สวัสดีคุณ ผู้ใช้
-            </div>
-      </Container>
-      <Container>
-        <div className="index-chart">
-          <form>
-            <div className="select">เลือกช่วงวันที่ต้องการ</div>
-            <InputGroup className="index-input-datarange mb-3">
-              <FormControl type="date" name="datetime-start" placeholder="yyyy-mm-dd" />
-              <InputGroup.Prepend className="input-group-addon">
-                <InputGroup.Text>ถึง</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl type="date" name="datetime-end" placeholder="yyyy-mm-dd" />
-              <button className="btn btn-info btn-search-summary btn-search" data-search="summary" data-mode="get">แสดงข้อมูล</button>
-            </InputGroup>
-          </form>
-        </div>
-      </Container>
 
-      <Container>
-        <div className="index-map">
-          <Chart />
-        </div>
-      </Container>
+      <Row>
+        <Col className="py-2" md={{ span: 8, offset: 2, }}>
+          <Card>
+            <Card.Body>
+              {/* <Card.Title></Card.Title> */}
+              <Card.Text>
+                {hello} ผู้ใช้
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
 
-      <Container>
-        <div className="index-top-ten">
+        <Col className="py-2" md={{ span: 8, offset: 2 }}>
+          <Card>
+            <Card.Body>
+              <Form>
+                <Form.Label className="select">เลือกช่วงวันที่ต้องการ</Form.Label>
+                <InputGroup className="index-input-datarange mb-3">
+                  <FormControl type="date" name="datetime-start" placeholder="yyyy-mm-dd" />
+                  <InputGroup.Prepend className="input-group-addon">
+                    <InputGroup.Text>ถึง</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <FormControl type="date" name="datetime-end" placeholder="yyyy-mm-dd" />
+                  <Button className="">แสดงข้อมูล</Button>
+                </InputGroup>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
 
-        </div>
-      </Container>
+        <Col className="py-2" md={{ span: 8, offset: 2 }}>
+          <Card>
+            <Card.Body>
+              <div className="index-map">
+                <Chart />
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
 
-      <Container>
-        <div className="index-table-wraper">
-          <Table striped hover>
-            <thead ref={fixedRef}>
-              <tr className="table-success">
-                <th>รหัส Tracking Code</th>
-                <th>รหัสติดตามพัสดุจากขนส่ง</th>
-                <th>ที่อยู่ปลายทาง</th>
-                <th>วันที่จัดส่ง</th>
-                <th>สถานะ</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-                <td>Address</td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
-      </Container>
+        <Col className="py-2" md={{ span: 8, offset: 2 }}>
+          <Card>
+            <Card.Body>
+              <div className="index-top-ten">
+
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col className="py-2" md={{ span: 8, offset: 2 }}>
+          <Card>
+            <Card.Body style={{ overflowX: 'scroll' }}>
+              <Table striped hover>
+                <thead ref={fixedRef}>
+                  <tr className="table-success">
+                    <th>รหัส Tracking Code</th>
+                    <th>รหัสติดตามพัสดุจากขนส่ง</th>
+                    <th>ที่อยู่ปลายทาง</th>
+                    <th>วันที่จัดส่ง</th>
+                    <th>สถานะ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Address</td>
+                    <td>Address</td>
+                    <td>Address</td>
+                    <td>Address</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Address</td>
+                    <td>Address</td>
+                    <td>Address</td>
+                    <td>Address</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>Address</td>
+                    <td>Address</td>
+                    <td>Address</td>
+                    <td>Address</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
       {/* </Spin> */}
-    </div>
+    </Container>
   )
+}
+
+export const getStaticProps = (lang) => {
+
+  const langTH = {
+    hello: "สวัสดี"
+  }
+
+  const langEN = {
+    hello: "hello"
+  }
+
+  if (lang.locale == "th") {
+    return {
+      props: langTH
+    }
+  }
+
+  else if (lang.locale == "en") {
+    return {
+      props: langEN
+    }
+  }
 }
 
 export default Index

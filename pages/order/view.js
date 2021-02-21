@@ -8,11 +8,12 @@ import { DateFromTo } from '../../component/MyComponent'
 import { Table } from 'react-bootstrap'
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { NEXT_PUBLIC_API_KEY } = process.env
+const { NEXT_PUBLIC_PROXY } = process.env
 
 const View = () => {
     const options = ["ทั้งหมด", "ยืนยันแล้ว", "ระหว่างจัดส่ง", "สำเร็จ", "เกิดข้อผิดพลาด"]
     const [cookies, setCookie, removeCookie] = useCookies(['users']);
-    const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/tracking_purchase/`, { cachePolicy: "no-cache" })
+    const { post, loading, error, response } = useFetch(`${NEXT_PUBLIC_PROXY}${NEXT_PUBLIC_ENDPOINT_URL}/tracking_purchase/`, { cachePolicy: "no-cache" })
     const orderRef = firestore.collection('order')
     const date = new Date()
     const [data, setData] = useState([])

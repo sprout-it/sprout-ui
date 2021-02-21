@@ -4,10 +4,11 @@ import { firestore } from '../../../utils/firebase'
 import useFetch from 'use-http'
 const orderRef = firestore.collection('order')
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
+const { NEXT_PUBLIC_PROXY } = process.env
 
 const Problam = () => {
     const [data, setData] = useState([])
-    const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/label`, { cachePolicy: "no-cache" })
+    const { post, loading, error, response } = useFetch(`${NEXT_PUBLIC_PROXY}${NEXT_PUBLIC_ENDPOINT_URL}/label`, { cachePolicy: "no-cache" })
     const getOrderValue = async (limit) => {
         const value = await orderRef.orderBy('created', 'desc').limit(2).get()
         const orderData = Promise.all(value.docs.map(async res => {

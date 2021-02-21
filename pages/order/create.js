@@ -7,13 +7,14 @@ import { InputGroup, FormControl, Button, Table, DropdownButton, Dropdown } from
 
 const { NEXT_PUBLIC_ENDPOINT_URL } = process.env
 const { NEXT_PUBLIC_API_KEY } = process.env
+const { NEXT_PUBLIC_PROXY } = process.env
 
 const Create = () => {
     const dataRef = firestore.collection('order')
     const { register, handleSubmit, errors, getValues } = useForm()
     const [dynamicTo, setDynamicTo] = useState([{ showMore: false }])
     const [update, setUpdate] = useState(0)
-    const { post, loading, error, response } = useFetch(`https://cors-anywhere.herokuapp.com/${NEXT_PUBLIC_ENDPOINT_URL}/booking/`, { cachePolicy: 'no-cache', })
+    const { post, loading, error, response } = useFetch(`${NEXT_PUBLIC_PROXY}${NEXT_PUBLIC_ENDPOINT_URL}/booking/`, { cachePolicy: 'no-cache', })
     const date = new Date()
 
     const onSubmit = async data => {
