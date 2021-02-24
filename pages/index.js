@@ -7,12 +7,22 @@ const Chart = dynamic(
   { ssr: false }
 );
 
-const Index = (props) => {
-  const { hello } = props
+const Index = () => {
+
+  const { locale } = useRouter()
+
+  const langTH = {
+    hello: 'สวัสดี'
+  }
+  const langEN = {
+    hello: 'Hello'
+  }
+
+  const t = locale == 'th' ? langTH : langEN
+
   const fixedRef = useRef()
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    // setTimeout(() => setLoading(false), 5000)
   }, [])
 
   return (
@@ -25,7 +35,7 @@ const Index = (props) => {
             <Card.Body>
               {/* <Card.Title></Card.Title> */}
               <Card.Text>
-                {hello} ผู้ใช้
+                {t.hello} ผู้ใช้
               </Card.Text>
             </Card.Body>
           </Card>
@@ -113,29 +123,6 @@ const Index = (props) => {
       {/* </Spin> */}
     </Container>
   )
-}
-
-export const getStaticProps = (lang) => {
-
-  const langTH = {
-    hello: "สวัสดี"
-  }
-
-  const langEN = {
-    hello: "hello"
-  }
-
-  if (lang.locale == "th") {
-    return {
-      props: langTH
-    }
-  }
-
-  else if (lang.locale == "en") {
-    return {
-      props: langEN
-    }
-  }
 }
 
 export default Index

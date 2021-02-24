@@ -25,7 +25,6 @@ import '../styles/profile.css'
 import '../styles/register.css'
 import '../styles/courier_rate.css'
 import 'antd/dist/antd.css';
-import 'react-phone-input-2/lib/high-res.css'
 import 'chart.js/dist/Chart.bundle.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -43,15 +42,15 @@ const App = ({ Component, pageProps }) => {
   }
 
   useEffect(() => {
-    auth.onAuthStateChanged(state => {
-      if (state) {
-        setUser(state)
-      } else {
-        setUser(null)
-        if (window.location.pathname != 'register' || window.location.pathname != 'login')
-          Router.push('login')
-      }
-    })
+    // auth.onAuthStateChanged(state => {
+    //   if (state) {
+    //     setUser(state)
+    //   } else {
+    //     setUser(null)
+    //     if (window.location.pathname != 'register' || window.location.pathname != 'login')
+    //       Router.push('login')
+    //   }
+    // })
   }, [])
 
   return <GlobalState.Provider value={{

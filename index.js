@@ -3,10 +3,9 @@ const functions = require("firebase-functions");
 const serviceAccount = require('./config/serviceAccount.json')
 const next = require("next");
 const bodyParser = require('body-parser')
+const { parse } = require('url')
 const isDev = process.env.DEVELOPMENT == 'true' || false
 const axios = require('axios')
-
-console.log(process.env.DEVELOPMENT)
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -37,26 +36,11 @@ expressServer.all('/proxy/*', async (req, res) => {
 })
 
 !isDev && expressServer.all('*', async (req, res) => {
-    return await handle(req, res)
+    const parsedUrl = parse(req.url, true)
+    return await handle(req, res, parsedUrl)
 });
-
-isDev && (async () => {
-    try {
-        await app.prepare();
-        const server = express();
-        server.all("*", (req, res) => {
-            return handle(req, res);
-        });
-        server.listen(port, (err) => {
-            if (err) throw err;
-            console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
-        });
-    } catch (e) {
-        console.error(e);
-        process.exit(1);
-    }
-})();
 
 isDev && expressServer.listen(3000, () => console.log(`Running on port: 3000`))
 const server = functions.https.onRequest(expressServer)
+
 exports.nextjs = { server };

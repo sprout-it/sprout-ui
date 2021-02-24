@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TweenMax } from 'gsap'
 import Link from 'next/link'
 import GlobalState from '../utils/context'
 import Image from 'next/image'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { useRouter } from 'next/router'
 
-const navigationListAuthenticated = [
+const navigationListAuthenticatedTH = [
     {
         name: 'รายการส่งของ',
         icon: "supplies.svg",
@@ -88,24 +89,131 @@ const navigationListAuthenticated = [
     }
 ]
 
+const navigationListAuthenticatedEN = [
+    {
+        name: 'summary',
+        icon: "supplies.svg",
+        children: [
+            {
+                name: 'Orders',
+                url: "/order/view"
+            },
+            {
+                name: 'พิมพ์ใบจัดส่ง/ปะหน้า',
+                url: "/order/purchase"
+            },
+            {
+                name: 'Create order',
+                url: "/order/create"
+            },
+            // {
+            //     name: 'สร้างรายการจากไฟล์',
+            //     url: "/order/upload"
+            // },
+            // {
+            //     name: 'รายการขนส่งที่เกิดปัญหา',
+            //     url: "/report/order/problam"
+            // }
+        ],
+    },
+    // {
+    //     name: 'รายงานทางบัญชี',
+    //     icon: "bill.svg",
+    //     children: [
+    //         {
+    //             name: 'รายงานทางบัญชี',
+    //             url: "/report"
+    //         },
+    //         {
+    //             name: 'รายการค้างชำระ',
+    //             url: "/report/invoice"
+    //         },
+    //         {
+    //             name: 'รายงานใบเสร็จรับเงิน',
+    //             url: "/report/receipt"
+    //         },
+    //         // {
+    //         //     name: 'รายงานความคุ้มครองพัสดุ',
+    //         //     url: "/report/order/insurance"
+    //         // }
+    //     ]
+    // },
+    {
+        name: 'Address',
+        icon: "address.svg",
+        children: [
+            {
+                name: 'Source/Destination',
+                url: "/address/origin"
+            }
+        ]
+    },
+    {
+        name: 'Settings',
+        icon: "settings.svg",
+        children: [
+            {
+                name: 'Profile',
+                url: "/profile"
+            },
+            {
+                name: 'Pricing',
+                url: "/courier_rate"
+            },
+            {
+                name: 'Change password',
+                url: "/reset_password"
+            },
+            // {
+            //     name: 'ออกจากระบบ',
+            //     url: "/logout"
+            // }
+        ]
+    }
+]
+
+const langTH = {
+    home: 'หน้าแรก',
+    logout: 'ออกจากระบบ',
+    login: 'เข้าสู่ระบบ'
+}
+
+const langEN = {
+    home: 'Home',
+    logout: 'logout',
+    login: 'login'
+}
+
 const NavigationBar = () => {
-    const { user } = useContext(GlobalState)
+    // const { user } = useContext(GlobalState)
+    // const { locale } = useContext(GlobalState)
+    const user = true
+    const { locale } = useRouter()
+
+    const t = locale == 'th' ? langTH : langEN
+
+    const navigationListAuthenticated = locale == 'th' ? navigationListAuthenticatedTH : navigationListAuthenticatedEN
+
+    useEffect(() => {
+        console.log(locale)
+    }, [])
+
     return <>
         {
             user &&
             <Navbar collapseOnSelect expand="lg" style={{ background: "rgb(195, 230, 203)" }} >
-                <Link href="/">
-                    <Navbar.Brand>
-                        <a>Home</a>
-                    </Navbar.Brand>
-                </Link>
+                <Navbar.Brand>
+                    <Link href="/" locale={locale} >
+                        <a>{t.home}</a>
+                    </Link>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse>
                     <Nav className="mr-auto"></Nav>
                     <Nav>
                         {
                             navigationListAuthenticated.map(item =>
-                                <div style={{ display: 'flex' }}>
+                                <div key={item.name} style={{ display: 'flex' }}>
                                     <Image
                                         style={{ marginRight: 5 }}
                                         src={item.icon ? "/" + item.icon : "/"}
@@ -127,9 +235,10 @@ const NavigationBar = () => {
                                                     <Link
                                                         key={child.url}
                                                         href={child.url}
+                                                        locale={locale}
                                                     >
                                                         <NavDropdown.Item
-                                                            href={child.url}
+                                                            href={locale + child.url}
                                                         >
                                                             {child.name}
                                                         </NavDropdown.Item>
@@ -143,16 +252,18 @@ const NavigationBar = () => {
                         }
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/logout">
-                            <Image
-                                style={{ marginRight: 5 }}
-                                src='/logout.svg'
-                                width={20}
-                                height={20}
-                                alt="packages"
-                            />
-                        ออกจากระบบ
-                        </Nav.Link>
+                        <Link href="/logout" locale={locale}>
+                            <Nav.Link href="/logout">
+                                <Image
+                                    style={{ marginRight: 5 }}
+                                    src='/logout.svg'
+                                    width={20}
+                                    height={20}
+                                    alt="packages"
+                                />
+                                {t.logout}
+                            </Nav.Link>
+                        </Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -163,24 +274,22 @@ const NavigationBar = () => {
             <Navbar collapseOnSelect expand="lg" style={{ background: "rgb(195, 230, 203)" }} >
                 <Nav className="mr-auto"></Nav>
                 <Nav>
-                    <Nav.Link href="/logout">
-                        <Image
-                            style={{ marginRight: 5 }}
-                            src='/user.svg'
-                            width={20}
-                            height={20}
-                            alt="packages"
-                        />
-                        เข้าสู่ระบบ
-                    </Nav.Link>
+                    <Link href="/login">
+                        <Nav.Link href="/login">
+                            <Image
+                                style={{ marginRight: 5 }}
+                                src='/user.svg'
+                                width={20}
+                                height={20}
+                                alt="packages"
+                            />
+                            {t.login}
+                        </Nav.Link>
+                    </Link>
                 </Nav>
             </Navbar>
         }
     </>
-}
-
-export const getStaticProps = () => {
-    return { props: "" }
 }
 
 export default NavigationBar
